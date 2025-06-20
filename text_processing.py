@@ -12,13 +12,26 @@ try:
     if "OPENAI_API_KEY" in os.environ:
         openai.api_key = os.environ["OPENAI_API_KEY"]
     _openai_client = openai.OpenAI()
-except Exception:
+except Exception:  # pragma: no cover - OpenAI optional
     openai = None  # type: ignore
     _openai_client = None
 
-nltk.download('punkt', quiet=True)
-nltk.download('stopwords', quiet=True)
-nltk.download('wordnet', quiet=True)
+
+def ensure_nltk_data():
+    resources = {
+        "punkt": "tokenizers/punkt",
+        "punkt_tab": "tokenizers/punkt_tab/english/",
+        "stopwords": "corpora/stopwords",
+        "wordnet": "corpora/wordnet",
+    }
+    for pkg, path in resources.items():
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            nltk.download(pkg, quiet=True)
+
+
+ensure_nltk_data()
 
 
 def preprocess_text(text: str) -> str:
