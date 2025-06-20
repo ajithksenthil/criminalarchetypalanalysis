@@ -2,7 +2,11 @@
 import argparse
 import numpy as np
 from data_loading import load_all_criminals_type1, load_type2_data
-from text_processing import preprocess_text, generate_embeddings
+from text_processing import (
+    preprocess_text,
+    generate_embeddings,
+    generate_imputed_embeddings,
+)
 from analysis import kmeans_cluster, build_conditional_markov, compute_stationary_distribution, plot_state_transition_diagram
 
 
@@ -12,6 +16,11 @@ def main():
     parser.add_argument("--type2_csv", help="Path to Type2 CSV file or directory")
     parser.add_argument("--n_clusters", type=int, default=5, help="Number of clusters")
     parser.add_argument("--diagram", default="state_transition.png", help="Output path for transition diagram")
+    parser.add_argument(
+        "--lexical_impute",
+        action="store_true",
+        help="Use LLM-generated lexical variations when computing embeddings",
+    )
     args = parser.parse_args()
 
     criminals = load_all_criminals_type1(args.type1_dir)
@@ -23,7 +32,10 @@ def main():
             event_ids.append(cid)
 
     processed = [preprocess_text(e) for e in events]
-    embeddings = generate_embeddings(processed)
+    if args.lexical_impute:
+        embeddings = generate_imputed_embeddings(processed)
+    else:
+        embeddings = generate_embeddings(processed)
     labels, _ = kmeans_cluster(embeddings, args.n_clusters)
 
     sequences = {}
