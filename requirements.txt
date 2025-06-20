@@ -5,3 +5,4 @@ networkx
 sentence-transformers
 nltk
 pandas
+openai
