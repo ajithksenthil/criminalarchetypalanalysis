@@ -1,9 +1,9 @@
-numpy
-pandas
 matplotlib
-seaborn
 networkx
 nltk
+numpy
 openai
-sentence-transformers
+pandas
 scikit-learn
+seaborn
+sentence-transformers
