@@ -1,2 +1,8 @@
 # criminalarchetypalanalysis
-Archetypal life event analysis for criminal psychoanalysis 
+Archetypal life event analysis for criminal psychoanalysis
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```

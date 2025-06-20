@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+seaborn
+networkx
+nltk
+openai
+sentence-transformers
+scikit-learn
