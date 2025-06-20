@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import networkx as nx
 from sklearn.cluster import KMeans
+from sklearn.manifold import TSNE
+from sklearn.metrics import silhouette_score, davies_bouldin_score
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -72,3 +75,35 @@ def plot_state_transition_diagram(transition_matrix: np.ndarray, out_path: str =
     plt.title("State Transition Diagram")
     plt.savefig(out_path)
     plt.close()
+
+
+def evaluate_clustering(embeddings: np.ndarray, labels: np.ndarray) -> dict:
+    """Return common clustering validation metrics."""
+    metrics = {
+        "silhouette": float(silhouette_score(embeddings, labels)),
+        "davies_bouldin": float(davies_bouldin_score(embeddings, labels)),
+    }
+    return metrics
+
+
+def plot_tsne_embeddings(
+    embeddings: np.ndarray,
+    labels: np.ndarray,
+    out_path: str = "tsne.png",
+    random_state: int = 42,
+):
+    """Visualize embeddings using t-SNE."""
+    tsne = TSNE(n_components=2, random_state=random_state)
+    reduced = tsne.fit_transform(embeddings)
+    plt.figure(figsize=(6, 6))
+    sns.scatterplot(x=reduced[:, 0], y=reduced[:, 1], hue=labels, palette="tab10", legend=False)
+    plt.title("t-SNE of Event Embeddings")
+    plt.savefig(out_path)
+    plt.close()
+
+
+def transition_entropy(matrix: np.ndarray) -> float:
+    """Compute the Shannon entropy of a Markov transition matrix."""
+    with np.errstate(divide="ignore"):
+        logp = np.where(matrix > 0, np.log2(matrix), 0)
+    return float(-(matrix * logp).sum())

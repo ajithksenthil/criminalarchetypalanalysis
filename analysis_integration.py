@@ -26,6 +26,7 @@ import json
 import argparse
 import warnings
 import re
+import random
 import nltk
 import openai
 import pickle
@@ -43,28 +44,51 @@ from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
+
+from analysis import (
+    evaluate_clustering,
+    plot_tsne_embeddings,
+    transition_entropy,
+)
 
 # Optional: For additional clustering methods
 # from sklearn.cluster import AgglomerativeClustering, DBSCAN
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-# Instantiate a client instance (you can do this at the top of your script)
-
 
 # --------------------------------------------------
 # 1. GLOBAL SETTINGS
 # --------------------------------------------------
-nltk.download('punkt', quiet=True)
-nltk.download('stopwords', quiet=True)
-nltk.download('wordnet', quiet=True)
 
-# Set your OpenAI API key if needed (or leave commented if using --no_llm)
+def ensure_nltk_data():
+    """Download required NLTK data if not present."""
+    resources = {
+        "punkt": "tokenizers/punkt",
+        "punkt_tab": "tokenizers/punkt_tab/english/",
+        "stopwords": "corpora/stopwords",
+        "wordnet": "corpora/wordnet",
+    }
+    for pkg, path in resources.items():
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            nltk.download(pkg, quiet=True)
+
+
+ensure_nltk_data()
+
+# Reproducibility
+random.seed(42)
+np.random.seed(42)
+
+# Set your OpenAI API key from the environment
+client = None
 if "OPENAI_API_KEY" in os.environ:
     openai.api_key = os.environ["OPENAI_API_KEY"]
-# openai.api_key = "YOUR_ACTUAL_KEY"
-client = openai.OpenAI(api_key="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")
+    client = openai.OpenAI()
 
 # --------------------------------------------------
 # 2. HELPER FUNCTIONS
@@ -537,9 +561,13 @@ def integrated_logistic_regression_extended(criminal_sequences: dict, type2_df: 
 
     logreg = LogisticRegression()
     try:
+        acc_scores = cross_val_score(logreg, X, y, cv=5, scoring="accuracy")
+        f1_scores = cross_val_score(logreg, X, y, cv=5, scoring="f1")
         logreg.fit(X, y)
         preds = logreg.predict(X)
         print("[INFO] Extended Logistic Regression (predicting presence of target cluster):")
+        print(f"CV Accuracy: {acc_scores.mean():.3f} +/- {acc_scores.std():.3f}")
+        print(f"CV F1 Score: {f1_scores.mean():.3f}")
         print("CriminalID | Feature Vector (abused, sex, #victims) | Actual | Predicted")
         for cid, xi, actual, pred in zip(valid_ids, X, y, preds):
             print(f"{cid:20} | {xi} | {actual}      | {pred}")
@@ -618,9 +646,13 @@ def integrated_logistic_regression_analysis(criminal_sequences: dict, type2_df: 
         return
     logreg = LogisticRegression()
     try:
+        acc_scores = cross_val_score(logreg, X, y, cv=5, scoring="accuracy")
+        f1_scores = cross_val_score(logreg, X, y, cv=5, scoring="f1")
         logreg.fit(X, y)
         preds = logreg.predict(X)
         print("[INFO] Integrated Logistic Regression (predicting presence of target cluster):")
+        print(f"CV Accuracy: {acc_scores.mean():.3f} +/- {acc_scores.std():.3f}")
+        print(f"CV F1 Score: {f1_scores.mean():.3f}")
         print("CriminalID | Type2 (Physically abused?) | Actual | Predicted")
         for cid, xi, actual, pred in zip(valid_ids, X, y, preds):
             print(f"{cid:20} | {xi[0]:25} | {actual}      | {pred}")
@@ -699,6 +731,14 @@ def main():
     labels, kmeans_model = kmeans_cluster(embeddings, n_clusters=args.n_clusters)
     print(f"[INFO] Global KMeans clustering complete with {args.n_clusters} clusters.")
 
+    metrics = evaluate_clustering(embeddings, labels)
+    metrics_path = os.path.join(args.output_dir, "cluster_metrics.json")
+    with open(metrics_path, "w") as f:
+        json.dump(metrics, f, indent=4)
+    print(f"[INFO] Silhouette score: {metrics['silhouette']:.3f}, Davies-Bouldin: {metrics['davies_bouldin']:.3f}")
+    tsne_path = os.path.join(args.output_dir, "tsne.png")
+    plot_tsne_embeddings(embeddings, labels, out_path=tsne_path)
+
     # Optionally, label clusters using LLM.
     cluster_info = find_representative_samples(global_events, embeddings, labels, n_reps=3)
     if not args.no_llm and openai.api_key:
@@ -740,7 +780,9 @@ def main():
     diagram_path = os.path.join(args.output_dir, "global_state_transition.png")
     plot_state_transition_diagram(global_transition_matrix, out_path=diagram_path)
     stationary = compute_stationary_distribution(global_transition_matrix)
+    entropy = transition_entropy(global_transition_matrix)
     print("[INFO] Global stationary distribution:", stationary)
+    print(f"[INFO] Transition matrix entropy: {entropy:.3f}")
     np.save(os.path.join(args.output_dir, "global_transition_matrix.npy"), global_transition_matrix)
     np.save(os.path.join(args.output_dir, "global_stationary_distribution.npy"), stationary)
 
