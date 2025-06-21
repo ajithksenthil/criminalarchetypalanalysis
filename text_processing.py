@@ -5,6 +5,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
 try:
@@ -91,3 +92,10 @@ def generate_imputed_embeddings(sentences: list, model_name: str = "all-MiniLM-L
     model = SentenceTransformer(model_name)
     embs = [get_imputed_embedding(s, model, num_variants=num_variants) for s in sentences]
     return np.vstack(embs)
+
+
+def generate_tfidf_embeddings(sentences: list, max_features: int = 500) -> np.ndarray:
+    """Generate embeddings using a simple TF-IDF vectorizer."""
+    vectorizer = TfidfVectorizer(max_features=max_features)
+    vectors = vectorizer.fit_transform(sentences)
+    return vectors.toarray()
