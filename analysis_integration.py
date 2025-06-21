@@ -42,6 +42,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.model_selection import cross_val_score
@@ -161,6 +162,13 @@ def generate_embeddings(sentences: list, model_name='all-MiniLM-L6-v2') -> np.nd
     """
     model = SentenceTransformer(model_name)
     return model.encode(sentences)
+
+
+def generate_tfidf_embeddings(sentences: list, max_features: int = 500) -> np.ndarray:
+    """Generate embeddings using a simple TF-IDF vectorizer."""
+    vectorizer = TfidfVectorizer(max_features=max_features)
+    vectors = vectorizer.fit_transform(sentences)
+    return vectors.toarray()
 
 
 def kmeans_cluster(embeddings: np.ndarray, n_clusters=5, random_state=42):
@@ -677,6 +685,8 @@ def main():
                         help="Disable LLM calls if you have no OpenAI key.")
     parser.add_argument("--multi_modal", action="store_true",
                         help="Perform multi-modal clustering at the criminal level using Type 1 & Type 2 data.")
+    parser.add_argument("--use_tfidf", action="store_true",
+                        help="Use TF-IDF embeddings instead of SentenceTransformer (offline mode).")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -712,20 +722,22 @@ def main():
     # -------------------------------
     processed_events = [preprocess_text(e) for e in global_events]
     print(f"[DEBUG] Preprocessing complete. Number of processed events: {len(processed_events)}")
-    
-    # Instantiate your SentenceTransformer model once
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-    
-    imputed_embeddings = []
-    total_events = len(processed_events)
-    print("[DEBUG] Starting lexical imputation and embedding computation...")
-    for idx, event in enumerate(processed_events):
-        if idx % 50 == 0:
-            print(f"[DEBUG] Processing event {idx+1}/{total_events}")
-        avg_emb = get_imputed_embedding(event, model, num_variants=5)
-        imputed_embeddings.append(avg_emb)
-    embeddings = np.array(imputed_embeddings)
-    print("[DEBUG] Lexical imputation complete. Shape of embeddings:", embeddings.shape)
+
+    if args.use_tfidf:
+        embeddings = generate_tfidf_embeddings(processed_events)
+        print("[DEBUG] Using TF-IDF embeddings. Shape:", embeddings.shape)
+    else:
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        imputed_embeddings = []
+        total_events = len(processed_events)
+        print("[DEBUG] Starting lexical imputation and embedding computation...")
+        for idx, event in enumerate(processed_events):
+            if idx % 50 == 0:
+                print(f"[DEBUG] Processing event {idx+1}/{total_events}")
+            avg_emb = get_imputed_embedding(event, model, num_variants=5)
+            imputed_embeddings.append(avg_emb)
+        embeddings = np.array(imputed_embeddings)
+        print("[DEBUG] Lexical imputation complete. Shape of embeddings:", embeddings.shape)
 
     # Global KMeans clustering on all events.
     labels, kmeans_model = kmeans_cluster(embeddings, n_clusters=args.n_clusters)
