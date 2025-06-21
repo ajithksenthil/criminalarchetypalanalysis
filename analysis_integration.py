@@ -52,6 +52,7 @@ from analysis import (
     plot_tsne_embeddings,
     transition_entropy,
 )
+from prototype_network import train_prototypical_network
 
 # Optional: For additional clustering methods
 # from sklearn.cluster import AgglomerativeClustering, DBSCAN
@@ -677,6 +678,8 @@ def main():
                         help="Disable LLM calls if you have no OpenAI key.")
     parser.add_argument("--multi_modal", action="store_true",
                         help="Perform multi-modal clustering at the criminal level using Type 1 & Type 2 data.")
+    parser.add_argument("--train_proto_net", action="store_true",
+                        help="Train a prototypical network on clustered event embeddings.")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -752,6 +755,14 @@ def main():
     with open(clusters_json_path, "w", encoding="utf-8") as jf:
         json.dump(cluster_info, jf, indent=4, ensure_ascii=False, default=numpy_to_python_default)
     print(f"[INFO] Global cluster info saved to {clusters_json_path}")
+
+    if args.train_proto_net:
+        print("[INFO] Training prototypical network on event embeddings...")
+        _, prototypes, val_acc = train_prototypical_network(embeddings, labels)
+        proto_path = os.path.join(args.output_dir, "prototypes.npy")
+        np.save(proto_path, prototypes)
+        print(f"[INFO] Prototypical network validation accuracy: {val_acc:.3f}")
+        print(f"[INFO] Prototypes saved to {proto_path}")
 
     # -------------------------------
     # Reconstruct Per-Criminal Cluster Sequences
