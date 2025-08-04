@@ -1,0 +1,82 @@
+{
+  "true_k": 4,
+  "conditional_optimal_k": 6,
+  "multi_objective_k": 6,
+  "silhouette_optimal_k": 4,
+  "conditional_results": {
+    "2": {
+      "significant_effects": 2,
+      "total_effects": 8,
+      "significance_rate": 0.25,
+      "mean_effect_size": 0.056026928926071994,
+      "score": 0.014006732231517998
+    },
+    "3": {
+      "significant_effects": 2,
+      "total_effects": 8,
+      "significance_rate": 0.25,
+      "mean_effect_size": 0.07313929694041277,
+      "score": 0.018284824235103192
+    },
+    "4": {
+      "significant_effects": 4,
+      "total_effects": 8,
+      "significance_rate": 0.5,
+      "mean_effect_size": 0.10410423215849847,
+      "score": 0.052052116079249235
+    },
+    "5": {
+      "significant_effects": 6,
+      "total_effects": 8,
+      "significance_rate": 0.75,
+      "mean_effect_size": 0.1177420718518553,
+      "score": 0.08830655388889147
+    },
+    "6": {
+      "significant_effects": 6,
+      "total_effects": 8,
+      "significance_rate": 0.75,
+      "mean_effect_size": 0.17379092130931154,
+      "score": 0.13034319098198366
+    },
+    "7": {
+      "significant_effects": 6,
+      "total_effects": 8,
+      "significance_rate": 0.75,
+      "mean_effect_size": 0.17156059966219053,
+      "score": 0.1286704497466429
+    }
+  },
+  "multi_objective_results": {
+    "2": {
+      "silhouette": 0.12226163196138046,
+      "effect_score": 0.014006732231517998,
+      "combined_score": 0.046483202150476736
+    },
+    "3": {
+      "silhouette": 0.1484384031340549,
+      "effect_score": 0.018284824235103192,
+      "combined_score": 0.05733089790478871
+    },
+    "4": {
+      "silhouette": 0.15998992625175062,
+      "effect_score": 0.052052116079249235,
+      "combined_score": 0.08443345913099964
+    },
+    "5": {
+      "silhouette": 0.12270676715707324,
+      "effect_score": 0.08830655388889147,
+      "combined_score": 0.098626617869346
+    },
+    "6": {
+      "silhouette": 0.09328987277680767,
+      "effect_score": 0.13034319098198366,
+      "combined_score": 0.11922719552043085
+    },
+    "7": {
+      "silhouette": 0.04737935459233897,
+      "effect_score": 0.1286704497466429,
+      "combined_score": 0.10428312120035171
+    }
+  }
+}
