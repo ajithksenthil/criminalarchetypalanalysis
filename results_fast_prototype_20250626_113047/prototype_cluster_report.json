@@ -1,0 +1,547 @@
+{
+  "n_clusters": 12,
+  "n_events": 2617,
+  "silhouette_score": 0.005575837444948574,
+  "cluster_info": {
+    "0": {
+      "size": 92,
+      "sample_events": [
+        {
+          "original": "\"Married Katie Rednoske whom he met on the USS Nimitz\"",
+          "standardized": "\"Married Katie Rednoske whom he met on the USS Nimitz\""
+        },
+        {
+          "original": "Met his future wife Faye Della Wilson",
+          "standardized": "Met his future wife Faye Della Wilson"
+        },
+        {
+          "original": "Married Faye six moths after they met",
+          "standardized": "Married Faye six moths after they met"
+        },
+        {
+          "original": "Admits to murdering Arthur Smothers and Kathleen Mikula. Later confesses to murdering Darrell Lane and Dante Evans Brown",
+          "standardized": "Admits to murdering Arthur Smothers and Kathleen Mikula. Later confesses to murdering Darrell Lane and Dante Evans [PERSON]"
+        },
+        {
+          "original": "Meets Michelle at Bobby Joe\u2019s, a roadhouse in California. They begin to date.",
+          "standardized": "Meets Michelle at Bobby Joe\u2019s, a roadhouse in California. They begin to date."
+        },
+        {
+          "original": "Met and began dating Gerald Gallego",
+          "standardized": "Met and began dating Gerald Gallego"
+        },
+        {
+          "original": "Met and strangled Essie Buck (WF, 39) and left her in his trunk overnight.",
+          "standardized": "Met and strangled Essie Buck (WF, 39) and left her in his trunk overnight."
+        },
+        {
+          "original": "Married Natoca Spann, a solider that he met in Germany.",
+          "standardized": "Married Natoca Spann, a solider that he met in Germany."
+        },
+        {
+          "original": "Meets Stephanie Brooks",
+          "standardized": "Meets Stephanie Brooks"
+        },
+        {
+          "original": "During a business trip, he meets up with Stephanie Brooks. She is impressed with his change and they begin to see each other every so often.",
+          "standardized": "During a business trip, he meets up with Stephanie Brooks. She is impressed with his change and they begin to see each other every so often."
+        }
+      ]
+    },
+    "1": {
+      "size": 82,
+      "sample_events": [
+        {
+          "original": "Eaton\u2019s trial for the murder of Kimmell begins.",
+          "standardized": "Eaton\u2019s trial for the murder of Kimmell begins."
+        },
+        {
+          "original": "Testimony begins in the penalty phase of the trial.",
+          "standardized": "Testimony begins in the penalty phase of the trial."
+        },
+        {
+          "original": "Begins to play sports and feels like he fits in with the team.",
+          "standardized": "Begins to play sports and feels like he fits in with the team."
+        },
+        {
+          "original": "Sentencing trial begins",
+          "standardized": "Sentencing trial begins"
+        },
+        {
+          "original": "Begins insulting mixed-raced couples",
+          "standardized": "Begins insulting mixed-raced couples"
+        },
+        {
+          "original": "Begins selling racist newspaper, The Thunderbolt",
+          "standardized": "Begins selling racist newspaper, The Thunderbolt"
+        },
+        {
+          "original": "The trial of Sean Gillis begins in Baton Rouge for the murder of Donna Bennett Johnston.",
+          "standardized": "The trial of Sean Gillis begins in Baton Rouge for the murder of Donna Bennett Johnston."
+        },
+        {
+          "original": "Jury begins to hear testimony in the penalty phase of the trial. Prosecutor Prem Burns presents evidence of other murders committed by Gillis.",
+          "standardized": "Jury begins to hear testimony in the penalty phase of the trial. Prosecutor Prem Burns presents evidence of other murders committed by Gillis."
+        },
+        {
+          "original": "Trial starts",
+          "standardized": "Trial starts"
+        },
+        {
+          "original": "Trial begins.",
+          "standardized": "Trial begins."
+        }
+      ]
+    },
+    "2": {
+      "size": 35,
+      "sample_events": [
+        {
+          "original": "Rory\u2019s mother dies from tetanus due to an abortion procedure",
+          "standardized": "Rory\u2019s mother dies from tetanus due to an abortion procedure"
+        },
+        {
+          "original": "Dies in Potosi Correctional Center",
+          "standardized": "Dies in Potosi Correctional Center"
+        },
+        {
+          "original": "Gerald Gallego dies in prison, of cancer. Age 56.",
+          "standardized": "Gerald Gallego dies in prison, of cancer. Age 56."
+        },
+        {
+          "original": "Father dies of a sudden heart attack at age 39. Mother remarries soon after. Berdella resented it.",
+          "standardized": "Father dies of a sudden heart attack at age 39. Mother remarries soon after. Berdella resented it."
+        },
+        {
+          "original": "Berdella dies in prison from a heart attack.",
+          "standardized": "Berdella dies in prison from a heart attack."
+        },
+        {
+          "original": "Dies of cancer in Ely State Prison, Nevada",
+          "standardized": "Dies of cancer in Ely State Prison, Nevada"
+        },
+        {
+          "original": "Kenneth\u2019s father, Mr. Bianchi, suddenly dies and Kenneth refuses to cry or show any emotion for his loss",
+          "standardized": "Kenneth\u2019s father, Mr. Bianchi, suddenly dies and Kenneth refuses to cry or show any emotion for his loss"
+        },
+        {
+          "original": "Thomas Burke (WM, 36) supposedly drops a burning cigarette while in a drunken sleep and dies of smoke inhalation. The nurse at the hospital in Parkton, NC, gives Velma a shot to 'ease her grief' and her drug abuse continues to escalate.",
+          "standardized": "Thomas Burke (WM, 36) supposedly drops a burning cigarette while in a drunken sleep and dies of smoke inhalation. The nurse at the hospital in Parkton, NC, gives Velma a shot to 'ease her grief' and her drug abuse continues to escalate."
+        },
+        {
+          "original": "\"Velma\u2019s father dies of lung cancer.\"",
+          "standardized": "\"Velma\u2019s father dies of lung cancer.\""
+        },
+        {
+          "original": "Montgomery Edwards (WM, 95) dies in Lumberton, North Carolina.",
+          "standardized": "Montgomery Edwards (WM, 95) dies in Lumberton, North Carolina."
+        }
+      ]
+    },
+    "3": {
+      "size": 139,
+      "sample_events": [
+        {
+          "original": "The FBI officially takes over the investigation of Kimmell\u2019s murder.",
+          "standardized": "The FBI officially takes over the investigation of Kimmell\u2019s murder."
+        },
+        {
+          "original": "Eaton is formally charged for abduction of Lisa Kimmell. He was charged with first degree murder, premeditated murder, aggravated robbery, first degree sexual assault, second degree sexual assault, and aggravated kidnapping",
+          "standardized": "Eaton is formally charged for abduction of Lisa Kimmell. He was charged with first degree murder, premeditated murder, aggravated robbery, first degree sexual assault, second degree sexual assault, and aggravated kidnapping"
+        },
+        {
+          "original": "Convicted for lewd and libidinous behavior with a young girl: should have been for attempted murder.",
+          "standardized": "Convicted for lewd and libidinous behavior with a young girl: should have been for attempted murder."
+        },
+        {
+          "original": "Found guilty of capital murder.",
+          "standardized": "Found guilty of capital murder."
+        },
+        {
+          "original": "Jury convicts Albright on one murder, Shirley Williams, due to strongest evidence (also her yellow raincoat) and he is sentenced to life in prison.",
+          "standardized": "Jury convicts Albright on one murder, Shirley [PERSON], due to strongest evidence (also her yellow raincoat) and he is sentenced to life in prison."
+        },
+        {
+          "original": "After reading the book, and reading all the news articles, we feel Mr. Albright may have been wrongly convicted of Shirley Williams\u2019 murder, and that whoever killed her likely killed the other two as well. We cannot guess if he has ever killed others, but lean towards his innocence in these three that qualify him as a serial killer. He does not seem to be a nice man, but maybe not a serial killer either.",
+          "standardized": "After reading the book, and reading all the news articles, we feel Mr. Albright may have been wrongly convicted of Shirley [PERSON]\u2019 murder, and that whoever killed her likely killed the other two as well. We cannot guess if he has ever killed others, but lean towards his innocence in these three that qualify him as a serial killer. He does not seem to be a nice man, but maybe not a serial killer either."
+        },
+        {
+          "original": "Charged with 14 counts of murder, three counts of robbery.",
+          "standardized": "Charged with 14 counts of murder, three counts of robbery."
+        },
+        {
+          "original": "Allegedly killed first victim in North Carolina, however, he is not considered a suspect for that murder.",
+          "standardized": "Allegedly killed first victim in North Carolina, however, he is not considered a suspect for that murder."
+        },
+        {
+          "original": "Attempted to murder a man. Offers Devon Marcus, a transvestite, $40 for sex before trying to choke him.  Marcus escapes and later helps ID Armstrong for police",
+          "standardized": "Attempted to murder a man. Offers Devon Marcus, a transvestite, $40 for sex before trying to choke him.  Marcus escapes and later helps ID Armstrong for police"
+        },
+        {
+          "original": "\"Arrested for the murder of Wendy Jordan. Told police at time of arrest that his wife was pregnant with 2nd child and that they were having marital problems\"",
+          "standardized": "\"Arrested for the murder of Wendy Jordan. Told police at time of arrest that his wife was pregnant with 2nd child and that they were having marital problems\""
+        }
+      ]
+    },
+    "4": {
+      "size": 92,
+      "sample_events": [
+        {
+          "original": "The family moves to Meeker, Colorado",
+          "standardized": "The family moves to Meeker, Colorado"
+        },
+        {
+          "original": "Rory\u2019s father, Gustavo Conde, leaves the family",
+          "standardized": "Rory\u2019s father, Gustavo Conde, leaves the family"
+        },
+        {
+          "original": "Rory has thanksgiving dinner with Carla and her family. He left around ten without saying goodbye and feeling rejected and angry.",
+          "standardized": "Rory has thanksgiving dinner with Carla and her family. He left around ten without saying goodbye and feeling rejected and angry."
+        },
+        {
+          "original": "After killing Ms. Dunn in January, Mr. Conde reported that he raped two more women. When asked why he gave up the killing, he cited the possibility that he would return to his family.",
+          "standardized": "After killing Ms. Dunn in January, Mr. Conde reported that he raped two more women. When asked why he gave up the killing, he cited the possibility that he would return to his family."
+        },
+        {
+          "original": "\"Moved to London. Poor eyesight put a career in professional football beyond his reach. Obsession with young girls was growing",
+          "standardized": "\"Moved to London. Poor eyesight put a career in professional football beyond his reach. Obsession with young girls was growing"
+        },
+        {
+          "original": "Attended families funeral (where he showed no emotion, smiled, and performed a dance step when leaving), then later arrested for the murders of his 5 family members",
+          "standardized": "Attended families funeral (where he showed no emotion, smiled, and performed a dance step when leaving), then later arrested for the murders of his 5 family members"
+        },
+        {
+          "original": "Found liable for $26.6 million for the slayings of his family in a wrongful death suit filed by the family estate and 4 yr. old sole survivor of the killings",
+          "standardized": "Found liable for $26.6 million for the slayings of his family in a wrongful death suit filed by the family estate and 4 yr. old sole survivor of the killings"
+        },
+        {
+          "original": "Bob and sister Robin adopted by the Coulson family",
+          "standardized": "Bob and sister Robin adopted by the Coulson family"
+        },
+        {
+          "original": "Moved to Fresno County, California",
+          "standardized": "Moved to Fresno County, California"
+        },
+        {
+          "original": "Ray moved his family to Rocky Comfort, Missouri",
+          "standardized": "Ray moved his family to Rocky Comfort, Missouri"
+        }
+      ]
+    },
+    "5": {
+      "size": 98,
+      "sample_events": [
+        {
+          "original": "First arrest for sexually assaulting young boys. Sent to Atascadero State Hospital and diagnosed as having a manic-depressive illness.",
+          "standardized": "First arrest for sexually assaulting young boys. Sent to Atascadero State Hospital and diagnosed as having a manic-depressive illness."
+        },
+        {
+          "original": "Released from Atascadero State Hospital.",
+          "standardized": "Released from Atascadero State Hospital."
+        },
+        {
+          "original": "\"Spent one month in a mental hospital after locking himself in a bathroom because a girl from his high school was pressuring him to have sex\"",
+          "standardized": "\"Spent one month in a mental hospital after locking himself in a bathroom because a girl from his high school was pressuring him to have sex\""
+        },
+        {
+          "original": "Kills Gerald Gordon (42) and wounds William Ash (30) in St. Louis, MO (Remington 700)",
+          "standardized": "Kills Gerald Gordon (42) and wounds [PERSON] Ash (30) in St. Louis, MO (Remington 700)"
+        },
+        {
+          "original": "Kills Johnny Brookshire (22) and wounds (paralyzed) his white girlfriend, Joy Williams (23), in Atlanta, GA",
+          "standardized": "Kills Johnny Brookshire (22) and wounds (paralyzed) his white girlfriend, Joy [PERSON] (23), in Atlanta, GA"
+        },
+        {
+          "original": "Went to a hospital to get a vasectomy so he would not have more children, and thus not have to pay more child support.",
+          "standardized": "Went to a hospital to get a vasectomy so he would not have more children, and thus not have to pay more child support."
+        },
+        {
+          "original": "Berdella went to the hospital after Pearson had bit his penis. Berdella was told that he would have to stay in the hospital for a couple days. Before his stay, he went home and suffocated Pearson with a plastic bag.",
+          "standardized": "Berdella went to the hospital after Pearson had bit his penis. Berdella was told that he would have to stay in the hospital for a couple days. Before his stay, he went home and suffocated Pearson with a plastic bag."
+        },
+        {
+          "original": "He was sent to Rampton Hospital were he was diagnosed with a personality disorder",
+          "standardized": "He was sent to Rampton Hospital were he was diagnosed with a personality disorder"
+        },
+        {
+          "original": "First taken to hospital by his mother with complaints of not being able to sleep and wetting the bed 5 times. Quote from doctor after first hospital visit \u2013 'Mother needs help'",
+          "standardized": "First taken to hospital by his mother with complaints of not being able to sleep and wetting the bed 5 times. Quote from doctor after first hospital visit \u2013 'Mother needs help'"
+        },
+        {
+          "original": "Is treated briefly at a psychiatric center in Rochester for mental problems",
+          "standardized": "Is treated briefly at a psychiatric center in Rochester for mental problems"
+        }
+      ]
+    },
+    "6": {
+      "size": 126,
+      "sample_events": [
+        {
+          "original": "Dale took a plea agreement in the Breeden family assault. He had already served 99 days in jail. He promised to several things: abide law, no violations of state and federal law, to answer questions truthfully, full time employment upon release, no possession/consumption of alcohol, no presence of drug and alcohol use, mental health evaluation 30 days later, go to counseling. He was given a 2-5 years suspended sentence in a halfway house, he had a curfew, and got his van back so he could do work.",
+          "standardized": "Dale took a plea agreement in the Breeden family assault. He had already served 99 days in jail. He promised to several things: abide law, no violations of state and federal law, to answer questions truthfully, full time employment upon release, no possession/consumption of alcohol, no presence of drug and alcohol use, mental health evaluation 30 days later, go to counseling. He was given a 2-5 years suspended sentence in a halfway house, he had a curfew, and got his van back so he could do work."
+        },
+        {
+          "original": "Carla leaves with Rory\u2019s 2 children after years of physical and psychological abuse.",
+          "standardized": "Carla leaves with Rory\u2019s 2 children after years of physical and psychological abuse."
+        },
+        {
+          "original": "Arrested on suspicion of the murder of a 13-year-old schoolgirl who has been missing for 27 years. Police in Devon and Cornwall confirmed that Black was being interrogated for Genette Tate who vanished near her home in 1978.",
+          "standardized": "Arrested on suspicion of the murder of a 13-year-old schoolgirl who has been missing for 27 years. Police in Devon and Cornwall confirmed that Black was being interrogated for Genette Tate who vanished near her home in 1978."
+        },
+        {
+          "original": "Sentenced to prison for theft and receiving stolen goods and served 6 months of a 2 year term. This began his fate of the 10\u2019s\u2026 he has trouble with the law approximately every 10 years, but was apparently a \nsuccessful thief and con artist in between!",
+          "standardized": "Sentenced to prison for theft and receiving stolen goods and served 6 months of a 2 year term. This began his fate of the 10\u2019s\u2026 he has trouble with the law approximately every 10 years, but was apparently a \nsuccessful thief and con artist in between!"
+        },
+        {
+          "original": "Rape and attempted strangulation of David McVicker, 14-years old.",
+          "standardized": "Rape and attempted strangulation of [PERSON] McVicker, 14-years old."
+        },
+        {
+          "original": "Killed first victim Marcus Grabs, 17-years old.",
+          "standardized": "Killed first victim Marcus Grabs, 17-years old."
+        },
+        {
+          "original": "Murdered Donald Hyden, 15-years old.",
+          "standardized": "Murdered Donald Hyden, 15-years old."
+        },
+        {
+          "original": "Murdered David Murillo, 17-years old.",
+          "standardized": "Murdered [PERSON] Murillo, 17-years old."
+        },
+        {
+          "original": "Murdered Dennis Frank Fox, 17-years old.",
+          "standardized": "Murdered Dennis Frank Fox, 17-years old."
+        },
+        {
+          "original": "Murdered Charles Miranda, 15-years old.",
+          "standardized": "Murdered Charles Miranda, 15-years old."
+        }
+      ]
+    },
+    "7": {
+      "size": 145,
+      "sample_events": [
+        {
+          "original": "Body was found of another suspected related murder of a female, Belinda Grantham, between the ages of 20-35. She appeared to be strangled to death and had been in the river several days before her discovery. She died from a neck trauma.",
+          "standardized": "Body was found of another suspected related murder of a female, Belinda Grantham, between the ages of 20-35. She appeared to be strangled to death and had been in the river several days before her discovery. She died from a neck trauma."
+        },
+        {
+          "original": "Naomi Kidder (not identified until March 1994) was found strangled to death by a wire ligature. She was discovered nude and was considered to be in a 'mummified' state when the body was found.",
+          "standardized": "Naomi Kidder (not identified until March 1994) was found strangled to death by a wire ligature. She was discovered nude and was considered to be in a 'mummified' state when the body was found."
+        },
+        {
+          "original": "On the evening of the sixth day, he gave her a roast beef dinner, dressed her up in socks and panties and drove her 70 miles away to Old Government Bridge. He struck her on the head with a lead pipe where she was then unconscious. He then proceeded to stab her with a large knife 6 times in her vital organs, then dumped her body in the shallow waters over the bridge.",
+          "standardized": "On the evening of the sixth day, he gave her a roast beef dinner, dressed her up in socks and panties and drove her 70 miles away to Old Government Bridge. He struck her on the head with a lead pipe where she was then unconscious. He then proceeded to stab her with a large knife 6 times in her vital organs, then dumped her body in the shallow waters over the bridge."
+        },
+        {
+          "original": "Body of Lisa Kimmell is found in the North Platte River",
+          "standardized": "Body of Lisa Kimmell is found in the North Platte River"
+        },
+        {
+          "original": "Picks up 30 year old prostitute Wendy Meyers (1).  The two negotiate sex for money and have sex until Francois becomes angry, believing that Myers had ripped him off. He begins choking her until she dies when the hyoid bone in her neck cracks.  After the murder, he bathes her and stores the body in a black garbage bag in the attic.",
+          "standardized": "Picks up 30 year old prostitute Wendy Meyers (1).  The two negotiate sex for money and have sex until Francois becomes angry, believing that Myers had ripped him off. He begins choking her until she dies when the hyoid bone in her neck cracks.  After the murder, he bathes her and stores the body in a black garbage bag in the attic."
+        },
+        {
+          "original": "Picks up 28 year old prostitute Gina Barone (2) and negotiates sex for money.  The two have sex in the garage of the Francois residence until Francois becomes angry, feeling that Barone had ripped him off.  He chokes her until her death and then moves the body to the attic of the house.",
+          "standardized": "Picks up 28 year old prostitute Gina Barone (2) and negotiates sex for money.  The two have sex in the garage of the Francois residence until Francois becomes angry, feeling that Barone had ripped him off.  He chokes her until her death and then moves the body to the attic of the house."
+        },
+        {
+          "original": "After dropping his mother off at work at the Hudson River Psychiatric Hospital, picks up prostitute Cathy Marsh (3).  He takes Marsh back home to his house after \narranging sex for money.  After sex, he chokes and kills Marsh before washing her body in the bathroom.  He then takes Marsh\u2019s body to the attic and places it with the other bodies.",
+          "standardized": "After dropping his mother off at work at the Hudson River Psychiatric Hospital, picks up prostitute Cathy Marsh (3).  He takes Marsh back home to his house after \narranging sex for money.  After sex, he chokes and kills Marsh before washing her body in the bathroom.  He then takes Marsh\u2019s body to the attic and places it with the other bodies."
+        },
+        {
+          "original": "Gina Barone is reported missing by her mother Patricia Barone.",
+          "standardized": "Gina Barone is reported missing by her mother [PERSON] Barone."
+        },
+        {
+          "original": "1st victim, Lazaro Comensana, who is a transvestite prostitute and drug addict. Death by strangulation after Rory discovers his hired prostitute is a man. Verbally blamed the victim for his marriage problems before dumping the body near his separated wife\u2019s apartment.",
+          "standardized": "1st victim, Lazaro Comensana, who is a transvestite prostitute and drug addict. Death by strangulation after Rory discovers his hired prostitute is a man. Verbally blamed the victim for his marriage problems before dumping the body near his separated wife\u2019s apartment."
+        },
+        {
+          "original": "11-year-old Susan Maxwell was abducted. Maxwells lived in a farmhouse outside Cornhill on Tweed, a small village on the English side of the English-Scottish border. Found body in a ditch next to a lay-by on the A518 road at Loxley, just outside of Uttoxeter in the Midlands, 250 miles from where Susan had been abducted, two weeks later.",
+          "standardized": "11-year-old Susan Maxwell was abducted. Maxwells lived in a farmhouse outside Cornhill on Tweed, a small village on the English side of the English-Scottish border. Found body in a ditch next to a lay-by on the A518 road at Loxley, just outside of Uttoxeter in the Midlands, 250 miles from where Susan had been abducted, two weeks later."
+        }
+      ]
+    },
+    "8": {
+      "size": 157,
+      "sample_events": [
+        {
+          "original": "Born in February 10, 1945",
+          "standardized": "Born in February 10, 1945"
+        },
+        {
+          "original": "Born in Poughkeepsie, NY",
+          "standardized": "Born in Poughkeepsie, NY"
+        },
+        {
+          "original": "Rory Conde is born in Barranquilla, Columbia",
+          "standardized": "Rory Conde is born in Barranquilla, Columbia"
+        },
+        {
+          "original": "Rory\u2019s son is born, Rory Conde Jr.",
+          "standardized": "Rory\u2019s son is born, Rory Conde Jr."
+        },
+        {
+          "original": "Rory\u2019s daughter is born, Lydia Conde",
+          "standardized": "Rory\u2019s daughter is born, Lydia Conde"
+        },
+        {
+          "original": "Bob was born to Robert Bennett",
+          "standardized": "Bob was born to [PERSON] Bennett"
+        },
+        {
+          "original": "Born in Amarillo Texas, adopted as the only child of Fred and Delle Albright",
+          "standardized": "Born in Amarillo Texas, adopted as the only child of Fred and Delle Albright"
+        },
+        {
+          "original": "Born in Connecticut.",
+          "standardized": "Born in Connecticut."
+        },
+        {
+          "original": "Armstrong was born in New Bern, North Carolina",
+          "standardized": "Armstrong was born in New Bern, North Carolina"
+        },
+        {
+          "original": "His biological father, John left after the loss of his younger brother, Michael",
+          "standardized": "His biological father, [PERSON] left after the loss of his younger brother, [PERSON]"
+        }
+      ]
+    },
+    "9": {
+      "size": 89,
+      "sample_events": [
+        {
+          "original": "Jury sentences Eaton to death.",
+          "standardized": "Jury sentences Eaton to death."
+        },
+        {
+          "original": "During the formal sentencing hearing, the judge added an additional life sentence in case the death sentence was overturned in a higher court",
+          "standardized": "During the formal sentencing hearing, the judge added an additional life sentence in case the death sentence was overturned in a higher court"
+        },
+        {
+          "original": "Sentenced to death for the murder of Rhonda Dunn with a 9 to 3 jury vote",
+          "standardized": "Sentenced to death for the murder of Rhonda Dunn with a 9 to 3 jury vote"
+        },
+        {
+          "original": "Pled guilty to 5 others murders for a plea agreement which would sentence him to five consecutive life sentences if the death penalty was not given for the murder of Rhonda Dunn",
+          "standardized": "Pled guilty to 5 others murders for a plea agreement which would sentence him to five consecutive life sentences if the death penalty was not given for the murder of Rhonda Dunn"
+        },
+        {
+          "original": "Death sentence is upheld",
+          "standardized": "Death sentence is upheld"
+        },
+        {
+          "original": "Conde is still waiting for his death sentence to be upheld",
+          "standardized": "Conde is still waiting for his death sentence to be upheld"
+        },
+        {
+          "original": "Jury agreed upon a verdict. Black was found guilty on all counts. Sentenced him to life for each of the charges. Eligible for parole in 2029 when he\u2019s 82.",
+          "standardized": "Jury agreed upon a verdict. Black was found guilty on all counts. Sentenced him to life for each of the charges. Eligible for parole in 2029 when he\u2019s 82."
+        },
+        {
+          "original": "Sentenced to death for the killings",
+          "standardized": "Sentenced to death for the killings"
+        },
+        {
+          "original": "Texas Court of Appeals confirmed the verdict and death sentence",
+          "standardized": "Texas Court of Appeals confirmed the verdict and death sentence"
+        },
+        {
+          "original": "Convicted during first trial he was sentenced to death in 1982 for 10 murders throughout Los Angeles County.",
+          "standardized": "Convicted during first trial he was sentenced to death in 1982 for 10 murders throughout Los Angeles County."
+        }
+      ]
+    },
+    "10": {
+      "size": 20,
+      "sample_events": [
+        {
+          "original": "Abducts Lynda Ann Healy from her basement bedroom in Seattle.",
+          "standardized": "Abducts Lynda Ann Healy from her basement bedroom in Seattle."
+        },
+        {
+          "original": "Abducts Donna Manson from the campus of Evergreen College.",
+          "standardized": "Abducts Donna Manson from the campus of Evergreen College."
+        },
+        {
+          "original": "Abducts Susan Rancourt from the Central Washington St. campus.",
+          "standardized": "Abducts Susan Rancourt from the Central Washington St. campus."
+        },
+        {
+          "original": "Abducts Kathy Parks from the campus at Oregon St.",
+          "standardized": "Abducts Kathy Parks from the campus at Oregon St."
+        },
+        {
+          "original": "Abducts Brenda Ball from Burien, Washington",
+          "standardized": "Abducts Brenda Ball from Burien, Washington"
+        },
+        {
+          "original": "Abducts Georgeann Hawkins from an alley near her University of Washington sorority house.",
+          "standardized": "Abducts Georgeann Hawkins from an alley near her University of Washington sorority house."
+        },
+        {
+          "original": "Abducts Nancy Wilcox.",
+          "standardized": "Abducts Nancy Wilcox."
+        },
+        {
+          "original": "Abducts Melissa Smith from Midvale, Utah.",
+          "standardized": "Abducts Melissa [PERSON] from Midvale, Utah."
+        },
+        {
+          "original": "Abducts Laura Aimee from Lehi, Utah.",
+          "standardized": "Abducts Laura Aimee from Lehi, Utah."
+        },
+        {
+          "original": "Fowls up an abduction attempt of Carol DeRonch, but abducts Debby Kent later that day in Bountiful, Utah.",
+          "standardized": "Fowls up an abduction attempt of Carol DeRonch, but abducts Debby Kent later that day in Bountiful, Utah."
+        }
+      ]
+    },
+    "11": {
+      "size": 1542,
+      "sample_events": [
+        {
+          "original": "While mother was hospitalized for trying to set the house on fire, Dale moved to Greeley, Colorado. Dale hated moving and the one person who was supportive in his life, his mother, was crazy. Father was abusive to him and his mother. Dale ran away often and enjoyed the outdoors rather than going to school. At this time He has his first Psychiatric evaluation. He was held back a year in school and flagged for having serious emotional problems. Got caught committing assault with a deadly weapon, stealing and turned over to Juvenile Authority\u2019s and was sent to Lookout Mountain School for Boys.",
+          "standardized": "While mother was hospitalized for trying to set the house on fire, Dale moved to Greeley, Colorado. Dale hated moving and the one person who was supportive in his life, his mother, was crazy. Father was abusive to him and his mother. Dale ran away often and enjoyed the outdoors rather than going to school. At this time He has his first Psychiatric evaluation. He was held back a year in school and flagged for having serious emotional problems. Got caught committing assault with a deadly weapon, stealing and turned over to Juvenile Authority\u2019s and was sent to Lookout Mountain School for Boys."
+        },
+        {
+          "original": "Did well at the reform school, learning to weld with proficiency. He leaves the reformatory at age 19.",
+          "standardized": "Did well at the reform school, learning to weld with proficiency. He leaves the reformatory at age 19."
+        },
+        {
+          "original": "Becomes involved with a 16-year old girl. The family likes her, but he was engaged. Gone during the weekdays and only home on the weekends. She ends up finding another man and leaving. Dale is devastated and things go bad and he has law trouble. He was stealing and sent to jail multiple times. He spent time in CO Buena Vista Correctional Facility.",
+          "standardized": "Becomes involved with a 16-year old girl. The family likes her, but he was engaged. Gone during the weekdays and only home on the weekends. She ends up finding another man and leaving. Dale is devastated and things go bad and he has law trouble. He was stealing and sent to jail multiple times. He spent time in CO Buena Vista Correctional Facility."
+        },
+        {
+          "original": "Calmed down and became a productive member of society. Dale helped to build a church to which he was a member and attended. He also was a member of the Operating Engineer\u2019s Union.",
+          "standardized": "Calmed down and became a productive member of society. Dale helped to build a church to which he was a member and attended. He also was a member of the Operating Engineer\u2019s Union."
+        },
+        {
+          "original": "Marries a woman named Melody (18) and on their wedding night she wants a divorce. They had many verbal arguments. He supported her but his job was volatile. She was violent hitting him and he never hit her back. During the relationship dale moves into a friends place after losing his job. During his stay, Dale almost chokes the friend\u2019s daughter to death over pork being prepared differently.",
+          "standardized": "Marries a woman named Melody (18) and on their wedding night she wants a divorce. They had many verbal arguments. He supported her but his job was volatile. She was violent hitting him and he never hit her back. During the relationship dale moves into a friends place after losing his job. During his stay, Dale almost chokes the friend\u2019s daughter to death over pork being prepared differently."
+        },
+        {
+          "original": "Dale has 2 sons and 1 daughter and was the main support of Melody. In 1979 Melody, Dale has 2 sons and 1 daughter and was the main support of Melody. In 1979 Melody files for divorce.",
+          "standardized": "Dale has 2 sons and 1 daughter and was the main support of Melody. In 1979 Melody, Dale has 2 sons and 1 daughter and was the main support of Melody. In 1979 Melody files for divorce."
+        },
+        {
+          "original": "Dale and Melody get back together and break up several times, but they divorce for good in 1986. At this point Dale threatens to kill himself and has a psychiatric evaluation. He went to the police with his depression and was sent to a community hospital where he was diagnosed with depression and thought disorder.",
+          "standardized": "Dale and Melody get back together and break up several times, but they divorce for good in 1986. At this point Dale threatens to kill himself and has a psychiatric evaluation. He went to the police with his depression and was sent to a community hospital where he was diagnosed with depression and thought disorder."
+        },
+        {
+          "original": "There were suspected related murders found in Wyoming. Only skeletal remains were found of a female age 25-30. Injuries were located in the upper arm, right rib cage, and left ankle. Her face was reconstructed statistically since it was destroyed by the elements.",
+          "standardized": "There were suspected related murders found in Wyoming. Only skeletal remains were found of a female age 25-30. Injuries were located in the upper arm, right rib cage, and left ankle. Her face was reconstructed statistically since it was destroyed by the elements."
+        },
+        {
+          "original": "Janelle Johnson was found with legs protruding from a make shift grave. She had been buried, but storm runoff had eroded away part of the grave. She had been raped and bite marks were left on her shoulder.",
+          "standardized": "Janelle [PERSON] was found with legs protruding from a make shift grave. She had been buried, but storm runoff had eroded away part of the grave. She had been raped and bite marks were left on her shoulder."
+        },
+        {
+          "original": "After his release from the hospital, he lived on his uncle\u2019s property in Moneta, WY. The property was located in a large open terrain. Dale converted a 1950s bus into a living space. It had little more than propane stove and small bed and no real power. Spent his time doing part time jobs and scavenging. During this time he became good at hunting and using a knife. The lack of accommodations leads Dale to develop bad hygiene.",
+          "standardized": "After his release from the hospital, he lived on his uncle\u2019s property in Moneta, WY. The property was located in a large open terrain. Dale converted a 1950s bus into a living space. It had little more than propane stove and small bed and no real power. Spent his time doing part time jobs and scavenging. During this time he became good at hunting and using a knife. The lack of accommodations leads Dale to develop bad hygiene."
+        }
+      ]
+    }
+  }
+}

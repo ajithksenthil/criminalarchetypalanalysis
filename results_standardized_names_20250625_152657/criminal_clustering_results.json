@@ -1,0 +1,192 @@
+{
+    "criminal_clusters": {
+        "eaton_dale": 2,
+        "francois_kendall": 1,
+        "conde_rory": 2,
+        "black_robert_-_spring_2006": 2,
+        "colson_robert": 2,
+        "cleaned_albright_charles_table": 0,
+        "bonin_william_-_fall_2007": 0,
+        "armstrong_john_eric": 1,
+        "copeland_ray": 2,
+        "franklin_joseph": 2,
+        "gillis_sean": 1,
+        "engleman_glennon": 1,
+        "daveggio_james": 1,
+        "gallego_charlene": 1,
+        "copeland_david": 2,
+        "corbett_tammy": 2,
+        "dunkle_jon": 0,
+        "berdella_robert": 2,
+        "gilyard_lorenzo": 1,
+        "dolezal_frank": 2,
+        "griffiths_stephen": 1,
+        "glatman_harvey": 1,
+        "gallego_gerald": 1,
+        "bianchi_kenneth": 2,
+        "cole_carroll": 1,
+        "durousseau_paul": 1,
+        "bundy_ted": 2,
+        "constanzo_adolfo": 2,
+        "greenwood_vaughn": 2,
+        "dahmer_jeffrey": 2,
+        "barfield_velma": 2,
+        "archer-gilligan_amy": 2,
+        "gerard_david": 2,
+        "corona_juan": 2,
+        "buono_angelo": 2,
+        "dodd_westley": 2,
+        "erler_bob": 2,
+        "fry_robert": 2,
+        "coleman_alton": 0,
+        "bathory_elizabeth_-_spring_2006": 2,
+        "coit_jill": 1,
+        "fraser_leonard": 0,
+        "gunness_belle": 1,
+        "brudos_jerome": 1,
+        "chase_richard": 2,
+        "corll_dean": 2,
+        "crawford_johnmartin": 0,
+        "eyler_larry": 2,
+        "evans_gary": 1,
+        "debardeleben_mike": 1,
+        "bernardo_paul": 1,
+        "christie_jon": 2,
+        "buenoano_judias_-_fall_2005": 2,
+        "cook_william": 0,
+        "gilbert_kristen": 1,
+        "gore_david": 2,
+        "collins_john": 2,
+        "anderson_dale": 1,
+        "cullen_charles": 2,
+        "evonitz_richard": 1,
+        "ford_wayne": 1,
+        "baumeister_herb_-_fall_2005": 1,
+        "costa_antone": 2,
+        "cottingham_richard": 2,
+        "gaskin_pee": 2,
+        "gein_ed": 1,
+        "chikatilo_andrei": 2,
+        "dugan_brian": 0,
+        "fisher_lavinia": 2
+    },
+    "cluster_sizes": {
+        "0": 8,
+        "1": 24,
+        "2": 37
+    },
+    "cluster_avg_matrices": {
+        "0": [
+            [
+                0.615530303030303,
+                0.04261363636363637,
+                0.13731060606060608,
+                0.08964646464646464,
+                0.11489898989898989
+            ],
+            [
+                0.0,
+                0.0875,
+                0.0,
+                0.6895833333333332,
+                0.22291666666666665
+            ],
+            [
+                0.2947916666666667,
+                0.025,
+                0.31677350427350426,
+                0.25614316239316237,
+                0.10729166666666667
+            ],
+            [
+                0.06936998937506038,
+                0.07556315425175113,
+                0.18200271283380465,
+                0.4796405810177417,
+                0.19342356252164217
+            ],
+            [
+                0.13731060606060608,
+                0.1378517316017316,
+                0.17748917748917747,
+                0.4632034632034632,
+                0.08414502164502163
+            ]
+        ],
+        "1": [
+            [
+                0.21617063492063496,
+                0.17609126984126988,
+                0.24593253968253972,
+                0.26736111111111116,
+                0.09444444444444444
+            ],
+            [
+                0.04226579520697168,
+                0.41184307930631464,
+                0.24509378829231768,
+                0.13300467914438505,
+                0.16779265805001098
+            ],
+            [
+                0.14002849002849005,
+                0.26941582722832724,
+                0.21372545278795277,
+                0.19813924501424499,
+                0.17869098494098493
+            ],
+            [
+                0.22494047619047622,
+                0.1685858232181762,
+                0.20986616868969812,
+                0.273468720821662,
+                0.12313881107998757
+            ],
+            [
+                0.04047619047619047,
+                0.4484593531468531,
+                0.13986239454989455,
+                0.15525793650793648,
+                0.21594412531912535
+            ]
+        ],
+        "2": [
+            [
+                0.5972597222597221,
+                0.09166171666171667,
+                0.15112545112545117,
+                0.08815081315081316,
+                0.0718022968022968
+            ],
+            [
+                0.048963459257576905,
+                0.3368554118554119,
+                0.262847856965504,
+                0.11850264203205377,
+                0.23283062988945344
+            ],
+            [
+                0.12235060940303906,
+                0.12596256958788926,
+                0.5051464214571632,
+                0.14735684940927907,
+                0.09918355014262943
+            ],
+            [
+                0.1531034281034281,
+                0.13126535626535626,
+                0.27253714753714764,
+                0.155011505011505,
+                0.28808256308256314
+            ],
+            [
+                0.03520980133883359,
+                0.24599878331315503,
+                0.2839373791110446,
+                0.10965484327108783,
+                0.32519919296587885
+            ]
+        ]
+    },
+    "silhouette_score": 0.09509744213186203
+}

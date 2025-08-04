@@ -47,6 +47,11 @@ from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
+from sklearn.decomposition import PCA
+from sklearn.metrics import silhouette_score as sklearn_silhouette_score
+from scipy.cluster.hierarchy import dendrogram, linkage
+from scipy.spatial.distance import pdist, squareform
+from scipy.stats import chi2_contingency, wasserstein_distance, ks_2samp
 
 from analysis import (
     evaluate_clustering,
@@ -54,6 +59,8 @@ from analysis import (
     transition_entropy,
 )
 from prototype_network import train_prototypical_network
+from data_loading import load_matched_criminal_data
+from data_cleaning import clean_type2_data
 
 # Optional: For additional clustering methods
 # from sklearn.cluster import AgglomerativeClustering, DBSCAN
@@ -223,7 +230,7 @@ def analyze_cluster_with_llm(representative_samples: list) -> str:
     joined_events = "\n".join(representative_samples)
     prompt_text = prompt_template.format(events=joined_events)
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4o-mini",  # or "gpt-4" if available
             messages=[
                 {"role": "system", "content": "You are an expert in criminal psychology and behavioral analysis."},
@@ -232,7 +239,7 @@ def analyze_cluster_with_llm(representative_samples: list) -> str:
             max_tokens=200,
             temperature=0.7
         )
-        reply = response.choices[0].message['content'].strip()
+        reply = response.choices[0].message.content.strip()
         return reply
     except Exception as e:
         print(f"[ERROR in LLM] {e}")
@@ -319,7 +326,44 @@ def build_conditional_markov(selected_criminal_ids, criminal_sequences, n_cluste
     return matrix
 
 
-def analyze_all_conditional_insights(type2_df, criminal_sequences, n_clusters, output_dir, global_stationary, diff_threshold=0.1):
+def compute_transition_statistics(matrix1, matrix2, global_stationary1, global_stationary2):
+    """
+    Compute statistical measures comparing two transition matrices.
+    
+    Returns:
+        dict: Statistical test results including chi-squared test, 
+              Wasserstein distance, and KS test results
+    """
+    # Flatten matrices for comparison
+    flat1 = matrix1.flatten()
+    flat2 = matrix2.flatten()
+    
+    # Chi-squared test on transition counts (need original counts, not probabilities)
+    # For now, we'll use a proxy based on the stationary distributions
+    
+    # Wasserstein distance between stationary distributions
+    wasserstein = wasserstein_distance(global_stationary1, global_stationary2)
+    
+    # KS test on the flattened transition probabilities
+    ks_stat, ks_pvalue = ks_2samp(flat1, flat2)
+    
+    # Frobenius norm of the difference
+    frobenius = np.linalg.norm(matrix1 - matrix2, 'fro')
+    
+    # Total variation distance between stationary distributions
+    tv_distance = 0.5 * np.sum(np.abs(global_stationary1 - global_stationary2))
+    
+    return {
+        'wasserstein_distance': float(wasserstein),
+        'ks_statistic': float(ks_stat),
+        'ks_pvalue': float(ks_pvalue),
+        'frobenius_norm': float(frobenius),
+        'tv_distance': float(tv_distance),
+        'l1_distance': float(np.sum(np.abs(global_stationary1 - global_stationary2)))
+    }
+
+
+def analyze_all_conditional_insights(type2_df, criminal_sequences, n_clusters, output_dir, global_stationary, global_transition_matrix, diff_threshold=0.1):
     """
     For each unique heading in the Type 2 data, group criminals by their value,
     compute the conditional Markov chain (and its stationary distribution),
@@ -340,6 +384,9 @@ def analyze_all_conditional_insights(type2_df, criminal_sequences, n_clusters, o
         for crim_id in criminal_sequences.keys():
             # Use our helper that searches in the key-value pairs
             val = get_value_for_heading(crim_id, type2_df, heading)
+            # Convert None to "Unknown" for consistency with data cleaning
+            if val is None:
+                val = "Unknown"
             condition_map[crim_id] = val
         # Get all unique values (including None)
         unique_values = set(condition_map.values())
@@ -348,8 +395,9 @@ def analyze_all_conditional_insights(type2_df, criminal_sequences, n_clusters, o
             selected_ids = [cid for cid, v in condition_map.items() if v == val]
             if not selected_ids:
                 continue
-            # Optionally, skip groups with very few criminals (adjust threshold as desired)
-            if len(selected_ids) < 3:
+            # Skip groups with very few criminals (adjust threshold as desired)
+            min_criminals = 5  # Increased threshold for more robust analysis
+            if len(selected_ids) < min_criminals:
                 print(f"[INFO] Skipping {heading} = {val} due to insufficient criminals (n={len(selected_ids)})")
                 continue
             # Build the conditional Markov chain for these criminals
@@ -358,8 +406,16 @@ def analyze_all_conditional_insights(type2_df, criminal_sequences, n_clusters, o
             stationary_cond = compute_stationary_distribution(matrix)
             # Compute the L1 difference with the global stationary distribution
             diff = np.sum(np.abs(stationary_cond - global_stationary))
-            # Record an insight if the difference is large enough
-            if diff > diff_threshold:
+            # Compute comprehensive statistics
+            stats = compute_transition_statistics(
+                matrix, 
+                global_transition_matrix,  # Need to pass this as parameter
+                stationary_cond,
+                global_stationary
+            )
+            
+            # Record an insight if the difference is large enough or statistically significant
+            if diff > diff_threshold or stats['ks_pvalue'] < 0.05:
                 safe_heading = re.sub(r'\W+', '_', heading)
                 safe_val = re.sub(r'\W+', '_', str(val))
                 insights[f"{safe_heading}={safe_val}"] = {
@@ -367,12 +423,17 @@ def analyze_all_conditional_insights(type2_df, criminal_sequences, n_clusters, o
                     "stationary_cond": stationary_cond.tolist(),
                     "global_stationary": global_stationary.tolist(),
                     "difference": diff,
+                    "statistics": stats,
+                    "significant": stats['ks_pvalue'] < 0.05
                 }
-                print(f"[INSIGHT] For condition {heading} = {val}, the L1 difference in stationary distribution is {diff:.3f} (n={len(selected_ids)}).")
-                # Optionally, you can also save the state transition diagram for this condition
-                out_path = os.path.join(output_dir, f"state_transition_{safe_heading}_{safe_val}.png")
-                plot_state_transition_diagram(matrix, out_path=out_path)
-                print(f"[INFO] Diagram for {heading} = {val} saved to {out_path}")
+                significance_str = " (SIGNIFICANT)" if stats['ks_pvalue'] < 0.05 else ""
+                print(f"[INSIGHT] For condition {heading} = {val}, L1 diff={diff:.3f}, KS p-value={stats['ks_pvalue']:.4f}{significance_str} (n={len(selected_ids)})")
+                
+                # Save the state transition diagram for significant conditions
+                if stats['ks_pvalue'] < 0.05 or diff > diff_threshold * 1.5:
+                    out_path = os.path.join(output_dir, f"state_transition_{safe_heading}_{safe_val}.png")
+                    plot_state_transition_diagram(matrix, out_path=out_path)
+                    print(f"[INFO] Diagram for {heading} = {val} saved to {out_path}")
     return insights
 
 # --------------------------------------------------
@@ -500,6 +561,9 @@ def run_all_conditional_markov_analysis(type2_df, criminal_sequences, n_clusters
         for crim_id in criminal_sequences.keys():
             # Use our helper that searches in the key-value pairs
             val = get_value_for_heading(crim_id, type2_df, heading)
+            # Convert None to "Unknown" for consistency with data cleaning
+            if val is None:
+                val = "Unknown"
             condition_map[crim_id] = val
         # Get all unique values (including None)
         unique_values = set(condition_map.values())
@@ -508,8 +572,9 @@ def run_all_conditional_markov_analysis(type2_df, criminal_sequences, n_clusters
             selected_ids = [cid for cid, v in condition_map.items() if v == val]
             if not selected_ids:
                 continue
-            # Optionally, skip groups with very few criminals (you can adjust the threshold)
-            if len(selected_ids) < 3:
+            # Skip groups with very few criminals (you can adjust the threshold)
+            min_criminals = 5  # Increased threshold for more robust analysis
+            if len(selected_ids) < min_criminals:
                 print(f"[INFO] Skipping {heading} = {val} due to insufficient criminals (n={len(selected_ids)})")
                 continue
             # Build the conditional Markov chain for these criminals
@@ -624,6 +689,144 @@ def get_imputed_embedding(event_text, model, num_variants=5):
     avg_embedding = np.mean(embeddings, axis=0)
     return avg_embedding
 
+def cluster_criminals_by_transition_patterns(criminal_sequences: dict, n_clusters: int, output_dir: str, n_criminal_clusters: int = 3):
+    """
+    Cluster criminals based on their individual transition matrices.
+    
+    Args:
+        criminal_sequences: Dict mapping criminal IDs to their cluster sequences
+        n_clusters: Number of event clusters (dimension of transition matrices)
+        output_dir: Directory to save outputs
+        n_criminal_clusters: Number of criminal clusters to create
+    
+    Returns:
+        Dict with criminal clustering results
+    """
+    # Build individual transition matrices for each criminal
+    criminal_matrices = {}
+    criminal_ids = []
+    
+    for crim_id, seq in criminal_sequences.items():
+        if len(seq) < 2:  # Skip criminals with too few events
+            continue
+            
+        # Build transition matrix for this criminal
+        matrix = np.zeros((n_clusters, n_clusters))
+        for s1, s2 in zip(seq[:-1], seq[1:]):
+            matrix[s1, s2] += 1
+            
+        # Normalize rows
+        row_sums = matrix.sum(axis=1, keepdims=True)
+        with np.errstate(divide='ignore', invalid='ignore'):
+            matrix = np.divide(matrix, row_sums, where=row_sums != 0)
+            for i in range(n_clusters):
+                if row_sums[i] == 0:
+                    matrix[i] = 1.0 / n_clusters
+                    
+        criminal_matrices[crim_id] = matrix
+        criminal_ids.append(crim_id)
+    
+    if len(criminal_matrices) < 2:
+        print("[WARNING] Not enough criminals with sufficient data for clustering")
+        return {}
+    
+    # Flatten matrices for clustering
+    matrix_vectors = []
+    for crim_id in criminal_ids:
+        matrix_vectors.append(criminal_matrices[crim_id].flatten())
+    matrix_vectors = np.array(matrix_vectors)
+    
+    # Perform clustering
+    kmeans = KMeans(n_clusters=n_criminal_clusters, random_state=42, n_init=10)
+    criminal_clusters = kmeans.fit_predict(matrix_vectors)
+    
+    # Compute distance matrix for hierarchical clustering visualization
+    dist_matrix = pdist(matrix_vectors, metric='euclidean')
+    linkage_matrix = linkage(dist_matrix, method='ward')
+    
+    # Plot dendrogram
+    plt.figure(figsize=(12, 8))
+    dendrogram(linkage_matrix, labels=criminal_ids, orientation='top')
+    plt.title('Hierarchical Clustering of Criminals by Transition Patterns')
+    plt.xlabel('Criminal ID')
+    plt.ylabel('Distance')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    dendro_path = os.path.join(output_dir, 'criminal_clustering_dendrogram.png')
+    plt.savefig(dendro_path)
+    plt.close()
+    print(f"[INFO] Criminal clustering dendrogram saved to {dendro_path}")
+    
+    # PCA visualization
+    if matrix_vectors.shape[1] > 2:
+        pca = PCA(n_components=2)
+        pca_coords = pca.fit_transform(matrix_vectors)
+        
+        plt.figure(figsize=(10, 8))
+        colors = plt.cm.Set3(np.linspace(0, 1, n_criminal_clusters))
+        for cluster_id in range(n_criminal_clusters):
+            mask = criminal_clusters == cluster_id
+            plt.scatter(pca_coords[mask, 0], pca_coords[mask, 1], 
+                       c=[colors[cluster_id]], label=f'Cluster {cluster_id}', s=100)
+            # Annotate points with criminal IDs
+            for idx in np.where(mask)[0]:
+                plt.annotate(criminal_ids[idx], (pca_coords[idx, 0], pca_coords[idx, 1]),
+                           fontsize=8, alpha=0.7)
+        plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%} variance)')
+        plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%} variance)')
+        plt.title('PCA of Criminal Transition Patterns')
+        plt.legend()
+        plt.grid(True, alpha=0.3)
+        pca_path = os.path.join(output_dir, 'criminal_clustering_pca.png')
+        plt.savefig(pca_path)
+        plt.close()
+        print(f"[INFO] Criminal clustering PCA saved to {pca_path}")
+    
+    # Compute and visualize average transition matrices for each cluster
+    cluster_avg_matrices = {}
+    for cluster_id in range(n_criminal_clusters):
+        cluster_criminal_ids = [criminal_ids[i] for i, c in enumerate(criminal_clusters) if c == cluster_id]
+        if not cluster_criminal_ids:
+            continue
+            
+        # Average the transition matrices
+        avg_matrix = np.zeros((n_clusters, n_clusters))
+        for crim_id in cluster_criminal_ids:
+            avg_matrix += criminal_matrices[crim_id]
+        avg_matrix /= len(cluster_criminal_ids)
+        cluster_avg_matrices[cluster_id] = avg_matrix
+        
+        # Plot average transition matrix for this cluster
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(avg_matrix, annot=True, fmt='.2f', cmap='YlOrRd', 
+                   xticklabels=range(n_clusters), yticklabels=range(n_clusters))
+        plt.title(f'Average Transition Matrix - Criminal Cluster {cluster_id} (n={len(cluster_criminal_ids)})')
+        plt.xlabel('To State')
+        plt.ylabel('From State')
+        heatmap_path = os.path.join(output_dir, f'criminal_cluster_{cluster_id}_avg_transition.png')
+        plt.savefig(heatmap_path)
+        plt.close()
+        print(f"[INFO] Average transition matrix for criminal cluster {cluster_id} saved to {heatmap_path}")
+    
+    # Return clustering results
+    results = {
+        'criminal_clusters': {criminal_ids[i]: int(criminal_clusters[i]) 
+                             for i in range(len(criminal_ids))},
+        'cluster_sizes': {i: int(np.sum(criminal_clusters == i)) 
+                         for i in range(n_criminal_clusters)},
+        'cluster_avg_matrices': {k: v.tolist() for k, v in cluster_avg_matrices.items()},
+        'silhouette_score': float(sklearn_silhouette_score(matrix_vectors, criminal_clusters))
+    }
+    
+    # Save results
+    results_path = os.path.join(output_dir, 'criminal_clustering_results.json')
+    with open(results_path, 'w') as f:
+        json.dump(results, f, indent=4)
+    print(f"[INFO] Criminal clustering results saved to {results_path}")
+    
+    return results
+
+
 def integrated_logistic_regression_analysis(criminal_sequences: dict, type2_df: pd.DataFrame, target_cluster: int):
     """
     For each criminal, use a Type 2 feature ("Physically abused?") to predict membership in a target cluster.
@@ -690,18 +893,38 @@ def main():
                         help="Train a prototypical network on clustered event embeddings.")
     parser.add_argument("--use_tfidf", action="store_true",
                         help="Use TF-IDF embeddings instead of SentenceTransformer (offline mode).")
+    parser.add_argument("--match_only", action="store_true",
+                        help="Only analyze criminals with both Type1 and Type2 data (recommended).")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
 
     # -------------------------------
-    # Load Type 1 data for all criminals
+    # Load Type 1 and Type 2 data
     # -------------------------------
-    criminals_data = load_all_criminals_type1(args.type1_dir)
-    if not criminals_data:
-        print(f"[ERROR] No Type1 files found in {args.type1_dir}. Exiting.")
-        sys.exit(1)
-    print(f"[INFO] Loaded Type 1 data for {len(criminals_data)} criminals.")
+    if args.match_only:
+        # Load only matched data
+        print("[INFO] Loading only criminals with both Type1 and Type2 data...")
+        from data_matching import find_matching_pairs
+        
+        # First check if Type2 path is a directory
+        if not os.path.isdir(args.type2_csv):
+            print("[ERROR] When using --match_only, --type2_csv must be a directory")
+            sys.exit(1)
+            
+        # Show matching statistics
+        matching_pairs = find_matching_pairs(args.type1_dir, args.type2_csv)
+        
+        # Load matched data
+        criminals_data, type2_df_matched = load_matched_criminal_data(args.type1_dir, args.type2_csv)
+    else:
+        # Load all Type 1 data (original behavior)
+        criminals_data = load_all_criminals_type1(args.type1_dir)
+        if not criminals_data:
+            print(f"[ERROR] No Type1 files found in {args.type1_dir}. Exiting.")
+            sys.exit(1)
+        print(f"[INFO] Loaded Type 1 data for {len(criminals_data)} criminals.")
+        type2_df_matched = None
 
     # Aggregate all events and record originating criminal IDs.
     global_events = []
@@ -745,6 +968,11 @@ def main():
     # Global KMeans clustering on all events.
     labels, kmeans_model = kmeans_cluster(embeddings, n_clusters=args.n_clusters)
     print(f"[INFO] Global KMeans clustering complete with {args.n_clusters} clusters.")
+    
+    # Save embeddings and labels for validation
+    np.save(os.path.join(args.output_dir, "embeddings.npy"), embeddings)
+    np.save(os.path.join(args.output_dir, "labels.npy"), labels)
+    print(f"[INFO] Saved embeddings and labels for validation")
 
     metrics = evaluate_clustering(embeddings, labels)
     metrics_path = os.path.join(args.output_dir, "cluster_metrics.json")
@@ -812,15 +1040,22 @@ def main():
     # -------------------------------
     # Load Type 2 Data and Perform Integrated Analysis
     # -------------------------------
-    try:
-        type2_df = load_type2_data(args.type2_csv)
-        print(f"[INFO] Loaded Type 2 data from {args.type2_csv} with shape {type2_df.shape}")
-    except FileNotFoundError as e:
-        print(f"[WARNING] {e}")
-        type2_df = None
-    except Exception as e:
-        print(f"[WARNING] Could not process Type 2 data: {e}")
-        type2_df = None
+    if args.match_only:
+        # We already loaded Type2 data in the matched loading
+        type2_df = type2_df_matched
+        if type2_df is not None:
+            print(f"[INFO] Using matched Type 2 data with shape {type2_df.shape}")
+    else:
+        # Load Type2 data separately (original behavior)
+        try:
+            type2_df = load_type2_data(args.type2_csv)
+            print(f"[INFO] Loaded Type 2 data from {args.type2_csv} with shape {type2_df.shape}")
+        except FileNotFoundError as e:
+            print(f"[WARNING] {e}")
+            type2_df = None
+        except Exception as e:
+            print(f"[WARNING] Could not process Type 2 data: {e}")
+            type2_df = None
 
     # Run integrated logistic regression analysis (predict presence of target cluster, e.g. cluster 0).
     target_cluster = 0
@@ -897,42 +1132,46 @@ def main():
         run_all_conditional_markov_analysis(type2_df, criminal_sequences, args.n_clusters, args.output_dir)
     if type2_df is not None:
         print("\n[INFO] Running automated conditional Markov chain insight analysis for all conditions...")
-        insights = analyze_all_conditional_insights(type2_df, criminal_sequences, args.n_clusters, args.output_dir, stationary, diff_threshold=0.1)
+        insights = analyze_all_conditional_insights(type2_df, criminal_sequences, args.n_clusters, args.output_dir, stationary, global_transition_matrix, diff_threshold=0.1)
         insights_path = os.path.join(args.output_dir, "conditional_insights.json")
         with open(insights_path, "w") as f:
             json.dump(insights, f, indent=4)
         print(f"[INFO] Conditional insights saved to {insights_path}")
 
-    # if args.multi_modal and type2_df is not None:
-    #     # Build mapping from CriminalID to a numeric Type 2 feature (e.g., "Physically abused?")
-    #     type2_features = {}
-    #     for _, row in type2_df.iterrows():
-    #         crim_id = str(row["CriminalID"])
-    #         abused_str = str(row.get("Physically abused?", "")).lower().strip()
-    #         abused_flag = 1 if abused_str.startswith("yes") else 0
-    #         type2_features[crim_id] = abused_flag
-    #     # Compute per-criminal average embedding.
-    #     criminal_embeddings = {}
-    #     for crim_id in criminals_data.keys():
-    #         indices = [i for i, cid in enumerate(event_criminal_ids) if cid == crim_id]
-    #         if indices:
-    #             criminal_embeddings[crim_id] = np.mean(embeddings[indices], axis=0)
-    #     # Concatenate average embedding with the Type 2 feature.
-    #     multi_modal_vectors = []
-    #     modal_criminal_ids = []
-    #     for crim_id, emb in criminal_embeddings.items():
-    #         if crim_id in type2_features:
-    #             combined = np.concatenate([emb, [type2_features[crim_id]]])
-    #             multi_modal_vectors.append(combined)
-    #             modal_criminal_ids.append(crim_id)
-    #     if multi_modal_vectors:
-    #         multi_modal_vectors = np.array(multi_modal_vectors)
-    #         mm_labels, mm_model = kmeans_cluster(multi_modal_vectors, n_clusters=args.n_clusters)
-    #         print("[INFO] Multi-modal clustering (criminal level) complete. Cluster assignments:")
-    #         for cid, label in zip(modal_criminal_ids, mm_labels):
-    #             print(f"  Criminal {cid}: Cluster {label}")
-    #     else:
-    #         print("[INFO] No criminals with multi-modal features available.")
+    # -------------------------------
+    # Cluster criminals by their transition patterns
+    # -------------------------------
+    print("\n[INFO] Clustering criminals based on their transition patterns...")
+    criminal_clustering_results = cluster_criminals_by_transition_patterns(
+        criminal_sequences, args.n_clusters, args.output_dir, n_criminal_clusters=3
+    )
+    
+    # -------------------------------
+    # Save all criminal sequences for reference
+    # -------------------------------
+    # Convert numpy types to Python types for JSON serialization
+    criminal_sequences_json = {}
+    for crim_id, seq in criminal_sequences.items():
+        criminal_sequences_json[crim_id] = [int(x) for x in seq]
+    
+    sequences_path = os.path.join(args.output_dir, "criminal_sequences.json")
+    with open(sequences_path, "w") as f:
+        json.dump(criminal_sequences_json, f, indent=4)
+    print(f"[INFO] Criminal sequences saved to {sequences_path}")
+
+    print(f"\n[INFO] All analysis complete. Results saved to {args.output_dir}")
+    
+    # Generate comprehensive report
+    try:
+        from report_generator import load_analysis_results, generate_summary_statistics, generate_html_report
+        print("\n[INFO] Generating comprehensive HTML report...")
+        results = load_analysis_results(args.output_dir)
+        stats = generate_summary_statistics(results)
+        report_path = generate_html_report(results, stats, args.output_dir)
+        print(f"[SUCCESS] Report available at: {report_path}")
+    except Exception as e:
+        print(f"[WARNING] Could not generate HTML report: {e}")
+
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,760 @@
+DETAILED CONDITIONAL PATTERNS REPORT
+======================================================================
+
+Total patterns analyzed: 251
+Significant patterns: 125
+Significance rate: 49.8%
+
+ALL SIGNIFICANT PATTERNS:
+----------------------------------------------------------------------
+
+1. Race=Black
+   p-value: 0.000000
+   L1 distance: 0.574
+   N criminals: 5
+   KS statistic: 0.493
+
+2. Age_when_first_had_intercourse=15
+   p-value: 0.000000
+   L1 distance: 0.677
+   N criminals: 5
+   KS statistic: 0.493
+
+3. Killer_age_at_start_of_series=30
+   p-value: 0.000000
+   L1 distance: 0.405
+   N criminals: 5
+   KS statistic: 0.493
+
+4. Victim_abducted_or_killed_at_contact_=No
+   p-value: 0.000000
+   L1 distance: 0.401
+   N criminals: 5
+   KS statistic: 0.493
+
+5. Birth_category=Unknown
+   p-value: 0.000000
+   L1 distance: 0.607
+   N criminals: 7
+   KS statistic: 0.472
+
+6. Spent_time_in_jail_=No
+   p-value: 0.000000
+   L1 distance: 0.574
+   N criminals: 6
+   KS statistic: 0.472
+
+7. Confessed=No
+   p-value: 0.000000
+   L1 distance: 0.528
+   N criminals: 6
+   KS statistic: 0.472
+
+8. Number_of_siblings=Unknown
+   p-value: 0.000000
+   L1 distance: 0.509
+   N criminals: 6
+   KS statistic: 0.465
+
+9. Burned_body=No
+   p-value: 0.000000
+   L1 distance: 0.612
+   N criminals: 6
+   KS statistic: 0.451
+
+10. Living_with=Self
+   p-value: 0.000000
+   L1 distance: 0.389
+   N criminals: 5
+   KS statistic: 0.438
+
+11. Left_at_scene_no_attempt_to_hide=Unknown
+   p-value: 0.000000
+   L1 distance: 0.481
+   N criminals: 5
+   KS statistic: 0.438
+
+12. Overkill_=Unknown
+   p-value: 0.000000
+   L1 distance: 0.373
+   N criminals: 5
+   KS statistic: 0.424
+
+13. Birth_order=Unknown
+   p-value: 0.000000
+   L1 distance: 0.546
+   N criminals: 8
+   KS statistic: 0.417
+
+14. Left_at_scene_hidden=Unknown
+   p-value: 0.000000
+   L1 distance: 0.506
+   N criminals: 6
+   KS statistic: 0.417
+
+15. Age_of_family_event=Early_childhood
+   p-value: 0.000000
+   L1 distance: 0.366
+   N criminals: 5
+   KS statistic: 0.410
+
+16. Applied_for_cop_job=Unknown
+   p-value: 0.000000
+   L1 distance: 0.509
+   N criminals: 6
+   KS statistic: 0.410
+
+17. Employment_status_during_series=Unemployed
+   p-value: 0.000000
+   L1 distance: 0.419
+   N criminals: 6
+   KS statistic: 0.410
+
+18. Type_of_serial_killer=Disorganized
+   p-value: 0.000000
+   L1 distance: 0.402
+   N criminals: 5
+   KS statistic: 0.410
+
+19. Number_of_victims=4
+   p-value: 0.000000
+   L1 distance: 0.343
+   N criminals: 5
+   KS statistic: 0.403
+
+20. Birth_order=3
+   p-value: 0.000000
+   L1 distance: 0.502
+   N criminals: 5
+   KS statistic: 0.403
+
+21. Number_of_siblings=1
+   p-value: 0.000000
+   L1 distance: 0.408
+   N criminals: 7
+   KS statistic: 0.403
+
+22. Sexual_preference=Homosexual
+   p-value: 0.000000
+   L1 distance: 0.323
+   N criminals: 5
+   KS statistic: 0.396
+
+23. Spent_time_in_jail_=Yes
+   p-value: 0.000000
+   L1 distance: 0.423
+   N criminals: 5
+   KS statistic: 0.396
+
+24. Robbed_victim_or_location=Unknown
+   p-value: 0.000000
+   L1 distance: 0.319
+   N criminals: 5
+   KS statistic: 0.396
+
+25. Moved_took_home=No
+   p-value: 0.000000
+   L1 distance: 0.575
+   N criminals: 8
+   KS statistic: 0.382
+
+26. States_where_killing_occurred=California
+   p-value: 0.000000
+   L1 distance: 0.374
+   N criminals: 5
+   KS statistic: 0.375
+
+27. Type_of_killer=Organized_Lust
+   p-value: 0.000000
+   L1 distance: 0.487
+   N criminals: 5
+   KS statistic: 0.375
+
+28. Number_of_siblings=3
+   p-value: 0.000000
+   L1 distance: 0.336
+   N criminals: 5
+   KS statistic: 0.375
+
+29. Highest_degree=Diploma
+   p-value: 0.000000
+   L1 distance: 0.390
+   N criminals: 6
+   KS statistic: 0.375
+
+30. Name_and_state_of_prison=Unknown
+   p-value: 0.000000
+   L1 distance: 0.514
+   N criminals: 6
+   KS statistic: 0.375
+
+31. Sex_of_partner=Male
+   p-value: 0.000000
+   L1 distance: 0.271
+   N criminals: 6
+   KS statistic: 0.375
+
+32. Branch=Army
+   p-value: 0.000000
+   L1 distance: 0.447
+   N criminals: 6
+   KS statistic: 0.368
+
+33. Number_of_victims=7
+   p-value: 0.000000
+   L1 distance: 0.482
+   N criminals: 6
+   KS statistic: 0.361
+
+34. Number_of_victims=5
+   p-value: 0.000000
+   L1 distance: 0.368
+   N criminals: 5
+   KS statistic: 0.361
+
+35. States_where_killing_occurred=Florida
+   p-value: 0.000000
+   L1 distance: 0.416
+   N criminals: 5
+   KS statistic: 0.361
+
+36. Highest_degree=High_school_diploma
+   p-value: 0.000000
+   L1 distance: 0.339
+   N criminals: 5
+   KS statistic: 0.361
+
+37. Types_of_jobs_worked=Unknown
+   p-value: 0.000000
+   L1 distance: 0.360
+   N criminals: 6
+   KS statistic: 0.361
+
+38. Moved_no_attempt_to_hide=Unknown
+   p-value: 0.000000
+   L1 distance: 0.436
+   N criminals: 7
+   KS statistic: 0.361
+
+39. Birth_category=Only_child
+   p-value: 0.000000
+   L1 distance: 0.226
+   N criminals: 7
+   KS statistic: 0.354
+
+40. Highest_grade_in_school=10
+   p-value: 0.000000
+   L1 distance: 0.332
+   N criminals: 5
+   KS statistic: 0.354
+
+41. Worked_in_law_enforcement_=Unknown
+   p-value: 0.000000
+   L1 distance: 0.558
+   N criminals: 5
+   KS statistic: 0.354
+
+42. Living_with=Unknown
+   p-value: 0.000000
+   L1 distance: 0.332
+   N criminals: 6
+   KS statistic: 0.354
+
+43. Spent_time_in_prison_=No
+   p-value: 0.000000
+   L1 distance: 0.483
+   N criminals: 9
+   KS statistic: 0.354
+
+44. Quick_efficient_=Unknown
+   p-value: 0.000000
+   L1 distance: 0.452
+   N criminals: 7
+   KS statistic: 0.354
+
+45. Killed_in_prison=Unknown
+   p-value: 0.000000
+   L1 distance: 0.288
+   N criminals: 5
+   KS statistic: 0.354
+
+46. Grades_in_school=Average
+   p-value: 0.000000
+   L1 distance: 0.481
+   N criminals: 7
+   KS statistic: 0.347
+
+47. Killer_age_at_start_of_series=32
+   p-value: 0.000000
+   L1 distance: 0.324
+   N criminals: 5
+   KS statistic: 0.347
+
+48. Cut_op_and_disposed_of=Yes
+   p-value: 0.000000
+   L1 distance: 0.363
+   N criminals: 6
+   KS statistic: 0.347
+
+49. Did_serial_killer_ever_live_with_adopted_family_=No
+   p-value: 0.000000
+   L1 distance: 0.480
+   N criminals: 7
+   KS statistic: 0.340
+
+50. Cut_up_and_disposed_of=Yes
+   p-value: 0.000000
+   L1 distance: 0.412
+   N criminals: 5
+   KS statistic: 0.340
+
+51. Time_in_forensic_hospital_prior_to_killing_=No
+   p-value: 0.000000
+   L1 distance: 0.419
+   N criminals: 9
+   KS statistic: 0.333
+
+52. Was_gun_used_=Yes
+   p-value: 0.000000
+   L1 distance: 0.313
+   N criminals: 7
+   KS statistic: 0.333
+
+53. Tortured_victims_=Unknown
+   p-value: 0.000000
+   L1 distance: 0.390
+   N criminals: 5
+   KS statistic: 0.333
+
+54. Date_convicted=Unknown
+   p-value: 0.000000
+   L1 distance: 0.385
+   N criminals: 6
+   KS statistic: 0.333
+
+55. Sexual_preference=Hetero
+   p-value: 0.000000
+   L1 distance: 0.264
+   N criminals: 6
+   KS statistic: 0.326
+
+56. Executed=Unknown
+   p-value: 0.000000
+   L1 distance: 0.414
+   N criminals: 6
+   KS statistic: 0.326
+
+57. Psychologically_abused_=Yes
+   p-value: 0.000001
+   L1 distance: 0.387
+   N criminals: 5
+   KS statistic: 0.312
+
+58. Committed_suicide=Yes
+   p-value: 0.000001
+   L1 distance: 0.401
+   N criminals: 5
+   KS statistic: 0.312
+
+59. Sexually_abused=Yes
+   p-value: 0.000002
+   L1 distance: 0.340
+   N criminals: 8
+   KS statistic: 0.306
+
+60. Sex=Female
+   p-value: 0.000005
+   L1 distance: 0.706
+   N criminals: 10
+   KS statistic: 0.299
+
+61. Problems_in_school_=Yes
+   p-value: 0.000005
+   L1 distance: 0.270
+   N criminals: 6
+   KS statistic: 0.299
+
+62. Applied_for_cop_job=Yes
+   p-value: 0.000008
+   L1 distance: 0.243
+   N criminals: 6
+   KS statistic: 0.292
+
+63. Been_to_a_psychologist_prior_to_killing_=No
+   p-value: 0.000008
+   L1 distance: 0.439
+   N criminals: 10
+   KS statistic: 0.292
+
+64. Victim_abducted_or_killed_at_contact_=Abducted
+   p-value: 0.000008
+   L1 distance: 0.326
+   N criminals: 6
+   KS statistic: 0.292
+
+65. Used_blindfold_=Unknown
+   p-value: 0.000008
+   L1 distance: 0.328
+   N criminals: 10
+   KS statistic: 0.292
+
+66. Date_of_death=Still_alive
+   p-value: 0.000008
+   L1 distance: 0.402
+   N criminals: 5
+   KS statistic: 0.292
+
+67. Did_serial_killer_live_with_a_step_parent_=No
+   p-value: 0.000015
+   L1 distance: 0.414
+   N criminals: 9
+   KS statistic: 0.285
+
+68. Sentence=Unknown
+   p-value: 0.000015
+   L1 distance: 0.391
+   N criminals: 7
+   KS statistic: 0.285
+
+69. Age_of_family_event=Adulthood
+   p-value: 0.000027
+   L1 distance: 0.249
+   N criminals: 7
+   KS statistic: 0.278
+
+70. Number_of_children=3
+   p-value: 0.000027
+   L1 distance: 0.465
+   N criminals: 7
+   KS statistic: 0.278
+
+71. Had_partner=Yes
+   p-value: 0.000027
+   L1 distance: 0.372
+   N criminals: 8
+   KS statistic: 0.278
+
+72. Ate_part_of_the_body_=Yes
+   p-value: 0.000027
+   L1 distance: 0.278
+   N criminals: 6
+   KS statistic: 0.278
+
+73. Took_totem_personal_item=Unknown
+   p-value: 0.000027
+   L1 distance: 0.243
+   N criminals: 7
+   KS statistic: 0.278
+
+74. Highest_grade_in_school=11
+   p-value: 0.000047
+   L1 distance: 0.675
+   N criminals: 5
+   KS statistic: 0.271
+
+75. Left_at_scene_buried=Unknown
+   p-value: 0.000047
+   L1 distance: 0.346
+   N criminals: 6
+   KS statistic: 0.271
+
+76. Problems_in_school_=No
+   p-value: 0.000081
+   L1 distance: 0.327
+   N criminals: 9
+   KS statistic: 0.264
+
+77. Living_with=Spouse
+   p-value: 0.000081
+   L1 distance: 0.326
+   N criminals: 8
+   KS statistic: 0.264
+
+78. Bed_wetting=Yes
+   p-value: 0.000081
+   L1 distance: 0.327
+   N criminals: 7
+   KS statistic: 0.264
+
+79. Posed_the_body_=Yes
+   p-value: 0.000081
+   L1 distance: 0.326
+   N criminals: 7
+   KS statistic: 0.264
+
+80. Confessed=Yes
+   p-value: 0.000081
+   L1 distance: 0.291
+   N criminals: 7
+   KS statistic: 0.264
+
+81. Mother_s_occupation=Homemaker
+   p-value: 0.000081
+   L1 distance: 0.606
+   N criminals: 5
+   KS statistic: 0.264
+
+82. Mother_s_Occupation=Homemaker
+   p-value: 0.000081
+   L1 distance: 0.606
+   N criminals: 5
+   KS statistic: 0.264
+
+83. Killed_prior_to_series_Age_=Yes
+   p-value: 0.000138
+   L1 distance: 0.377
+   N criminals: 5
+   KS statistic: 0.257
+
+84. Parent_s_marital_status=Divorced
+   p-value: 0.000232
+   L1 distance: 0.268
+   N criminals: 8
+   KS statistic: 0.250
+
+85. Employment_status_during_series=Unknown
+   p-value: 0.000232
+   L1 distance: 0.305
+   N criminals: 7
+   KS statistic: 0.250
+
+86. Branch=Navy
+   p-value: 0.000382
+   L1 distance: 0.460
+   N criminals: 5
+   KS statistic: 0.243
+
+87. Birth_category=Middle
+   p-value: 0.000622
+   L1 distance: 0.401
+   N criminals: 10
+   KS statistic: 0.236
+
+88. Physical_defect_=Unknown
+   p-value: 0.000622
+   L1 distance: 0.429
+   N criminals: 8
+   KS statistic: 0.236
+
+89. Killer_age_at_start_of_series=28
+   p-value: 0.000622
+   L1 distance: 0.332
+   N criminals: 6
+   KS statistic: 0.236
+
+90. Highest_degree=High_School_Diploma
+   p-value: 0.000998
+   L1 distance: 0.341
+   N criminals: 7
+   KS statistic: 0.229
+
+91. Number_of_children=0
+   p-value: 0.000998
+   L1 distance: 0.356
+   N criminals: 13
+   KS statistic: 0.229
+
+92. Abused_drugs=Unknown
+   p-value: 0.000998
+   L1 distance: 0.263
+   N criminals: 11
+   KS statistic: 0.229
+
+93. Number_of_children=2
+   p-value: 0.001577
+   L1 distance: 0.409
+   N criminals: 8
+   KS statistic: 0.222
+
+94. Sex_with_the_body_=Yes
+   p-value: 0.001577
+   L1 distance: 0.253
+   N criminals: 9
+   KS statistic: 0.222
+
+95. Was_serial_killer_ever_raised_by_a_relative_=No
+   p-value: 0.002456
+   L1 distance: 0.355
+   N criminals: 9
+   KS statistic: 0.215
+
+96. Employment_status_during_series=Employed
+   p-value: 0.002456
+   L1 distance: 0.293
+   N criminals: 7
+   KS statistic: 0.215
+
+97. Moved_no_attempt_to_hide=Yes
+   p-value: 0.002456
+   L1 distance: 0.412
+   N criminals: 7
+   KS statistic: 0.215
+
+98. Left_at_scene_buried=Yes
+   p-value: 0.003770
+   L1 distance: 0.253
+   N criminals: 11
+   KS statistic: 0.208
+
+99. Time_in_forensic_hospital_=Yes
+   p-value: 0.003770
+   L1 distance: 0.368
+   N criminals: 6
+   KS statistic: 0.208
+
+100. Teased_while_in_school_=Unknown
+   p-value: 0.005704
+   L1 distance: 0.340
+   N criminals: 15
+   KS statistic: 0.201
+
+101. Highest_grade_in_school=Unknown
+   p-value: 0.005704
+   L1 distance: 0.232
+   N criminals: 13
+   KS statistic: 0.201
+
+102. Committed_previous_crimes_=No
+   p-value: 0.005704
+   L1 distance: 0.362
+   N criminals: 13
+   KS statistic: 0.201
+
+103. Killing_occurred_in_home_of_victim_=Yes
+   p-value: 0.005704
+   L1 distance: 0.414
+   N criminals: 11
+   KS statistic: 0.201
+
+104. Number_of_victims=6
+   p-value: 0.008507
+   L1 distance: 0.185
+   N criminals: 8
+   KS statistic: 0.194
+
+105. Did_serial_killer_spend_time_in_an_orphanage_=No
+   p-value: 0.008507
+   L1 distance: 0.334
+   N criminals: 12
+   KS statistic: 0.194
+
+106. Did_serial_killer_spend_time_in_a_foster_home_=No
+   p-value: 0.008507
+   L1 distance: 0.335
+   N criminals: 12
+   KS statistic: 0.194
+
+107. Number_of_children=Unknown
+   p-value: 0.008507
+   L1 distance: 0.296
+   N criminals: 15
+   KS statistic: 0.194
+
+108. Gender_of_victims=Male
+   p-value: 0.008507
+   L1 distance: 0.156
+   N criminals: 13
+   KS statistic: 0.194
+
+109. Robbed_victim_or_location=Yes
+   p-value: 0.008507
+   L1 distance: 0.386
+   N criminals: 8
+   KS statistic: 0.194
+
+110. Age_of_family_event=Adolescence
+   p-value: 0.012505
+   L1 distance: 0.329
+   N criminals: 10
+   KS statistic: 0.188
+
+111. Problems_in_school_=Unknown
+   p-value: 0.012505
+   L1 distance: 0.258
+   N criminals: 14
+   KS statistic: 0.188
+
+112. Abused_alcohol=Unknown
+   p-value: 0.012505
+   L1 distance: 0.178
+   N criminals: 12
+   KS statistic: 0.188
+
+113. Killer_age_at_start_of_series=27
+   p-value: 0.012505
+   L1 distance: 0.273
+   N criminals: 8
+   KS statistic: 0.188
+
+114. Moved_to_home=No
+   p-value: 0.012505
+   L1 distance: 0.266
+   N criminals: 10
+   KS statistic: 0.188
+
+115. Birth_category=Youngest
+   p-value: 0.018122
+   L1 distance: 0.305
+   N criminals: 10
+   KS statistic: 0.181
+
+116. Number_of_victims=3
+   p-value: 0.025889
+   L1 distance: 0.272
+   N criminals: 11
+   KS statistic: 0.174
+
+117. Number_of_siblings=2
+   p-value: 0.025889
+   L1 distance: 0.181
+   N criminals: 9
+   KS statistic: 0.174
+
+118. Method_of_killing=Strangulation
+   p-value: 0.025889
+   L1 distance: 0.314
+   N criminals: 8
+   KS statistic: 0.174
+
+119. Moved_buried=Yes
+   p-value: 0.025889
+   L1 distance: 0.293
+   N criminals: 11
+   KS statistic: 0.174
+
+120. Spend_time_in_prison_=Unknown
+   p-value: 0.025889
+   L1 distance: 0.414
+   N criminals: 16
+   KS statistic: 0.174
+
+121. Teased_while_in_school_=No
+   p-value: 0.036460
+   L1 distance: 0.241
+   N criminals: 18
+   KS statistic: 0.167
+
+122. Teased_while_in_school_=Yes
+   p-value: 0.036460
+   L1 distance: 0.240
+   N criminals: 8
+   KS statistic: 0.167
+
+123. Took_totem_personal_item=Yes
+   p-value: 0.036460
+   L1 distance: 0.272
+   N criminals: 8
+   KS statistic: 0.167
+
+124. Sentence=Death
+   p-value: 0.036460
+   L1 distance: 0.180
+   N criminals: 13
+   KS statistic: 0.167
+
+125. Plead_NGRI=Yes
+   p-value: 0.036460
+   L1 distance: 0.379
+   N criminals: 8
+   KS statistic: 0.167
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import numpy as np
-from data_loading import load_all_criminals_type1, load_type2_data
+from data_loading import load_all_criminals_type1, load_type2_data, load_matched_criminal_data
 from text_processing import (
     preprocess_text,
     generate_embeddings,
@@ -21,9 +21,24 @@ def main():
         action="store_true",
         help="Use LLM-generated lexical variations when computing embeddings",
     )
+    parser.add_argument(
+        "--match_only",
+        action="store_true",
+        help="Only analyze criminals with both Type1 and Type2 data",
+    )
     args = parser.parse_args()
 
-    criminals = load_all_criminals_type1(args.type1_dir)
+    # Load data based on match_only flag
+    if args.match_only and args.type2_csv:
+        import os
+        if not os.path.isdir(args.type2_csv):
+            print("[ERROR] When using --match_only, --type2_csv must be a directory")
+            return
+        criminals, type2_df = load_matched_criminal_data(args.type1_dir, args.type2_csv)
+    else:
+        criminals = load_all_criminals_type1(args.type1_dir)
+        type2_df = None
+    
     events = []
     event_ids = []
     for cid, data in criminals.items():
@@ -47,9 +62,11 @@ def main():
     stationary = compute_stationary_distribution(matrix)
     print("Stationary distribution:", stationary)
 
-    if args.type2_csv:
+    if args.type2_csv and not args.match_only:
         df = load_type2_data(args.type2_csv)
         print("Loaded Type2 data with shape", df.shape)
+    elif args.match_only and type2_df is not None:
+        print("Using matched Type2 data with shape", type2_df.shape)
 
 
 if __name__ == "__main__":

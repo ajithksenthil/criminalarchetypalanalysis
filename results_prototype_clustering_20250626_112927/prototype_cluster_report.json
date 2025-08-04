@@ -1,0 +1,307 @@
+{
+  "n_clusters": 12,
+  "n_events": 2617,
+  "silhouette_score": 0.02487023536718896,
+  "cluster_info": {
+    "0": {
+      "size": 85,
+      "sample_events": [
+        {
+          "original": "Did well at the reform school, learning to weld with proficiency. He leaves the reformatory at age 19.",
+          "standardized": "Did well at the reform school, learning to weld with proficiency. He leaves the reformatory at age 19."
+        },
+        {
+          "original": "Graduated from Arlington Middle School",
+          "standardized": "Graduated from Arlington Middle School"
+        },
+        {
+          "original": "Started on the varsity football and wrestling teams in his freshman year in high school",
+          "standardized": "Started on the varsity football and wrestling teams [LOCATION] his freshman year [LOCATION] high school"
+        },
+        {
+          "original": "Graduates from high school",
+          "standardized": "Graduates from high school"
+        },
+        {
+          "original": "Discharged from the Army and returns home to live with family.  Begins attending Duchess County Community College and works for the Arlington School District as a janitor at Arlington Middle School.",
+          "standardized": "Discharged from the Army and returns home to live with family. Begins attending Duchess County Community College and works for the Arlington School District as a janitor at Arlington Middle School."
+        }
+      ]
+    },
+    "1": {
+      "size": 85,
+      "sample_events": [
+        {
+          "original": "Becomes Prisoner #A4160 at Attica Prison in New York.",
+          "standardized": "Becomes Prisoner #A4160 at Attica Prison [LOCATION] [LOCATION]."
+        },
+        {
+          "original": "Earns $30 a week as a welder in prison",
+          "standardized": "Earns $30 a week as a welder [LOCATION] prison"
+        },
+        {
+          "original": "Executed by lethal injection in a Texas prison",
+          "standardized": "Executed by lethal injection [LOCATION] a [LOCATION] prison"
+        },
+        {
+          "original": "Sentenced to prison for theft and receiving stolen goods and served 6 months of a 2 year term. This began his fate of the 10\u2019s\u2026 he has trouble with the law approximately every 10 years, but was apparently a \nsuccessful thief and con artist in between!",
+          "standardized": "Sentenced to prison for theft and receiving stolen goods and served 6 months of a 2 year term. This began his fate of the 10\u2019s\u2026 he has trouble with the law approximately every 10 years, but was apparently a successful thief and con artist [LOCATION] between!"
+        },
+        {
+          "original": "Jury convicts Albright on one murder, Shirley Williams, due to strongest evidence (also her yellow raincoat) and he is sentenced to life in prison.",
+          "standardized": "Jury convicts Albright on one murder, [PERSON], due to strongest evidence (also her yellow raincoat) and he is sentenced to life [LOCATION] prison."
+        }
+      ]
+    },
+    "2": {
+      "size": 488,
+      "sample_events": [
+        {
+          "original": "Body of Lisa Kimmell is found in the North Platte River",
+          "standardized": "Body of [PERSON] Kimmell is found [LOCATION] the North Platte River"
+        },
+        {
+          "original": "During the summer The uncle\u2019s son, Billy, and daughter come to live on the property. During this time, Dale produces a lot of stuff that can\u2019t be explained. However Billy accepts some of the stuff.",
+          "standardized": "During the summer The uncle\u2019s son, [PERSON], and daughter come to live on the property. During this time, Dale produces a lot of stuff that can\u2019t be explained. However [PERSON] accepts some of the stuff."
+        },
+        {
+          "original": "Both Dale and Billy go back to Moneta, WY.",
+          "standardized": "Both Dale and [PERSON] go back to Moneta, [LOCATION]."
+        },
+        {
+          "original": "Amy Wroe Bechtel a 24-year old female went missing while going out for a run to train for a 10k race. Major suspect related to a green Dodge van. This abduction had people relating to Kathleen Pehringer missing in 1989.",
+          "standardized": "[PERSON] Wroe Bechtel a 24-year old female went missing while going out for a run to train for a 10k race. Major suspect related to a [PERSON] Dodge van. This abduction had people relating to [PERSON] Pehringer missing [LOCATION] 1989."
+        },
+        {
+          "original": "Officer Bill Long sees a van parked and learns from dispatch that Dale was a fugitive felon. Long called for backup and the police found a new rifle in Dale\u2019s car. He was sent off to federal prison.",
+          "standardized": "Officer [PERSON] sees a van parked and learns from dispatch that Dale was a fugitive felon. [PERSON] called for backup and the police found a new rifle [LOCATION] Dale\u2019s car. He was sent off to federal prison."
+        }
+      ]
+    },
+    "3": {
+      "size": 352,
+      "sample_events": [
+        {
+          "original": "The family moves to Meeker, Colorado",
+          "standardized": "The family moves to Meeker, [LOCATION]"
+        },
+        {
+          "original": "There were suspected related murders found in Wyoming. Only skeletal remains were found of a female age 25-30. Injuries were located in the upper arm, right rib cage, and left ankle. Her face was reconstructed statistically since it was destroyed by the elements.",
+          "standardized": "There were suspected related murders found [LOCATION] [LOCATION]. Only skeletal remains were found of a female age 25-30. Injuries were located [LOCATION] the upper arm, right rib cage, and left ankle. Her face was reconstructed statistically since it was destroyed by the elements."
+        },
+        {
+          "original": "After his release from the hospital, he lived on his uncle\u2019s property in Moneta, WY. The property was located in a large open terrain. Dale converted a 1950s bus into a living space. It had little more than propane stove and small bed and no real power. Spent his time doing part time jobs and scavenging. During this time he became good at hunting and using a knife. The lack of accommodations leads Dale to develop bad hygiene.",
+          "standardized": "After his release from the hospital, he lived on his uncle\u2019s property [LOCATION] Moneta, [LOCATION]. The property was located [LOCATION] a large open terrain. Dale converted a 1950s bus into a living space. It had little more than propane stove and small bed and no real power. Spent his time doing part time jobs and scavenging. During this time he became good at hunting and using a knife. The lack of accommodations leads Dale to develop bad hygiene."
+        },
+        {
+          "original": "Patricia Candace Walsh and Scott Zykowski (married) were both found dead. Scott was found near El Paso, TX and Patricia was found in rural county Utah. She was sexually tortured and left in desert conditions with arms posed in the form of a cross. The sun had destroyed her and left her partially mummified.",
+          "standardized": "[PERSON] Candace Walsh and [PERSON] Zykowski (married) were both found dead. [PERSON] was found near El Paso, [LOCATION] and [PERSON] was found [LOCATION] rural county [LOCATION]. She was sexually tortured and left [LOCATION] desert conditions with arms posed [LOCATION] the form of a cross. The sun had destroyed her and left her partially mummified."
+        },
+        {
+          "original": "On the evening of the sixth day, he gave her a roast beef dinner, dressed her up in socks and panties and drove her 70 miles away to Old Government Bridge. He struck her on the head with a lead pipe where she was then unconscious. He then proceeded to stab her with a large knife 6 times in her vital organs, then dumped her body in the shallow waters over the bridge.",
+          "standardized": "On the evening of the sixth day, he gave her a roast beef dinner, dressed her up [LOCATION] socks and panties and drove her 70 miles away to Old Government Bridge. He struck her on the head with a lead pipe where she was then unconscious. He then proceeded to stab her with a large knife 6 times [LOCATION] her vital organs, then dumped her body [LOCATION] the shallow waters over the bridge."
+        }
+      ]
+    },
+    "4": {
+      "size": 997,
+      "sample_events": [
+        {
+          "original": "Calmed down and became a productive member of society. Dale helped to build a church to which he was a member and attended. He also was a member of the Operating Engineer\u2019s Union.",
+          "standardized": "Calmed down and became a productive member of society. Dale helped to build a church to which he was a member and attended. He also was a member of the Operating Engineer\u2019s Union."
+        },
+        {
+          "original": "Marries a woman named Melody (18) and on their wedding night she wants a divorce. They had many verbal arguments. He supported her but his job was volatile. She was violent hitting him and he never hit her back. During the relationship dale moves into a friends place after losing his job. During his stay, Dale almost chokes the friend\u2019s daughter to death over pork being prepared differently.",
+          "standardized": "Marries a woman named Melody (18) and on their wedding night she wants a divorce. They had many verbal arguments. He supported her but his job was volatile. She was violent hitting him and he never hit her back. During the relationship dale moves into a friends place after losing his job. During his stay, Dale almost chokes the friend\u2019s daughter to death over pork being prepared differently."
+        },
+        {
+          "original": "Dale has 2 sons and 1 daughter and was the main support of Melody. In 1979 Melody, Dale has 2 sons and 1 daughter and was the main support of Melody. In 1979 Melody files for divorce.",
+          "standardized": "Dale has 2 sons and 1 daughter and was the main support of Melody. [LOCATION] 1979 Melody, Dale has 2 sons and 1 daughter and was the main support of Melody. [LOCATION] 1979 Melody files for divorce."
+        },
+        {
+          "original": "Dale and Melody get back together and break up several times, but they divorce for good in 1986. At this point Dale threatens to kill himself and has a psychiatric evaluation. He went to the police with his depression and was sent to a community hospital where he was diagnosed with depression and thought disorder.",
+          "standardized": "Dale and Melody get back together and break up several times, but they divorce for good [LOCATION] 1986. At this point Dale threatens to kill himself and has a psychiatric evaluation. He went to the police with his depression and was sent to a community hospital where he was diagnosed with depression and thought disorder."
+        },
+        {
+          "original": "Janelle Johnson was found with legs protruding from a make shift grave. She had been buried, but storm runoff had eroded away part of the grave. She had been raped and bite marks were left on her shoulder.",
+          "standardized": "Janelle [PERSON] was found with legs protruding from a make shift grave. She had been buried, but storm runoff had eroded away part of the grave. She had been raped and bite marks were left on her shoulder."
+        }
+      ]
+    },
+    "5": {
+      "size": 75,
+      "sample_events": [
+        {
+          "original": "Body was found of another suspected related murder of a female, Belinda Grantham, between the ages of 20-35. She appeared to be strangled to death and had been in the river several days before her discovery. She died from a neck trauma.",
+          "standardized": "Body was found of another suspected related murder of a female, Belinda Grantham, between the ages of 20-35. She appeared to be strangled to death and had been [LOCATION] the river several days before her discovery. She died from a neck trauma."
+        },
+        {
+          "original": "Naomi Kidder (not identified until March 1994) was found strangled to death by a wire ligature. She was discovered nude and was considered to be in a 'mummified' state when the body was found.",
+          "standardized": "Naomi Kidder (not identified until March 1994) was found strangled to death by a wire ligature. She was discovered nude and was considered to be [LOCATION] a 'mummified' state when the body was found."
+        },
+        {
+          "original": "Jury sentences Eaton to death.",
+          "standardized": "Jury sentences Eaton to death."
+        },
+        {
+          "original": "During the formal sentencing hearing, the judge added an additional life sentence in case the death sentence was overturned in a higher court",
+          "standardized": "During the formal sentencing hearing, the judge added an additional life sentence [LOCATION] case the death sentence was overturned [LOCATION] a higher court"
+        },
+        {
+          "original": "Sentenced to death for the murder of Rhonda Dunn with a 9 to 3 jury vote",
+          "standardized": "Sentenced to death for the murder of Rhonda Dunn with a 9 to 3 jury vote"
+        }
+      ]
+    },
+    "6": {
+      "size": 54,
+      "sample_events": [
+        {
+          "original": "\"Moved to London. Poor eyesight put a career in professional football beyond his reach. Obsession with young girls was growing",
+          "standardized": "\"Moved to London. Poor eyesight put a career [LOCATION] professional football beyond his reach. Obsession with [PERSON] girls was growing"
+        },
+        {
+          "original": "Moved to Fresno County, California",
+          "standardized": "Moved to Fresno County, [LOCATION]"
+        },
+        {
+          "original": "Ray moved his family to Rocky Comfort, Missouri",
+          "standardized": "Ray moved his family to Rocky Comfort, [LOCATION]"
+        },
+        {
+          "original": "Moved his family to Illinois",
+          "standardized": "Moved his family to [LOCATION]"
+        },
+        {
+          "original": "He moved back to Missouri",
+          "standardized": "He moved back to [LOCATION]"
+        }
+      ]
+    },
+    "7": {
+      "size": 87,
+      "sample_events": [
+        {
+          "original": "While mother was hospitalized for trying to set the house on fire, Dale moved to Greeley, Colorado. Dale hated moving and the one person who was supportive in his life, his mother, was crazy. Father was abusive to him and his mother. Dale ran away often and enjoyed the outdoors rather than going to school. At this time He has his first Psychiatric evaluation. He was held back a year in school and flagged for having serious emotional problems. Got caught committing assault with a deadly weapon, stealing and turned over to Juvenile Authority\u2019s and was sent to Lookout Mountain School for Boys.",
+          "standardized": "While mother was hospitalized for trying to set the house on fire, Dale moved to Greeley, [LOCATION]. Dale hated moving and the one person who was supportive [LOCATION] his life, his mother, was crazy. Father was abusive to him and his mother. Dale ran away often and enjoyed the outdoors rather than going to school. At this time He has his first Psychiatric evaluation. He was held back a year [LOCATION] school and flagged for having serious emotional problems. Got caught committing assault with a deadly weapon, stealing and turned over to Juvenile Authority\u2019s and was sent to Lookout Mountain School for Boys."
+        },
+        {
+          "original": "Gina Barone is reported missing by her mother Patricia Barone.",
+          "standardized": "Gina Barone is reported missing by her mother [PERSON] Barone."
+        },
+        {
+          "original": "Rory\u2019s mother dies from tetanus due to an abortion procedure",
+          "standardized": "Rory\u2019s mother dies from tetanus due to an abortion procedure"
+        },
+        {
+          "original": "Margaret Tulip died. Once again deprived of a mother. Although a local couple offered to take him in, it was decided that Black would go to the Redding Children's Home near Falkirk, close to the place of his birth.",
+          "standardized": "Margaret Tulip died. Once again deprived of a mother. Although a local couple offered to take him [LOCATION], it was decided that Black would go to the Redding Children's Home near Falkirk, close to the place of his birth."
+        },
+        {
+          "original": "\"His father was very abusive and neglectful toward him and his mother\"",
+          "standardized": "\"His father was very abusive and neglectful toward him and his mother\""
+        }
+      ]
+    },
+    "8": {
+      "size": 130,
+      "sample_events": [
+        {
+          "original": "Becomes involved with a 16-year old girl. The family likes her, but he was engaged. Gone during the weekdays and only home on the weekends. She ends up finding another man and leaving. Dale is devastated and things go bad and he has law trouble. He was stealing and sent to jail multiple times. He spent time in CO Buena Vista Correctional Facility.",
+          "standardized": "Becomes involved with a 16-year old girl. The family likes her, but he was engaged. Gone during the weekdays and only home on the weekends. She ends up finding another man and leaving. Dale is devastated and things go bad and he has law trouble. He was stealing and sent to jail multiple times. He spent time [LOCATION] [LOCATION] Buena Vista Correctional Facility."
+        },
+        {
+          "original": "Eaton abducts 18-year old Lisa Marie Kimmell (Lil Miss) in Fremont County, WY. Eaton drives them 20 miles to his house, an old school bus. She was raped and he performed many violent sexual assaults. He was attached to Lisa and did not kill her immediately. He kept newspaper articles about her missing and she was considered different from the other victims.",
+          "standardized": "Eaton abducts 18-year old [PERSON] Kimmell (Lil Miss) [LOCATION] Fremont County, [LOCATION]. Eaton drives them 20 miles to his house, an old school bus. She was raped and he performed many violent sexual assaults. He was attached to [PERSON] and did not kill her immediately. He kept newspaper articles about her missing and she was considered different from the other victims."
+        },
+        {
+          "original": "Picks up 28 year old prostitute Gina Barone (2) and negotiates sex for money.  The two have sex in the garage of the Francois residence until Francois becomes angry, feeling that Barone had ripped him off.  He chokes her until her death and then moves the body to the attic of the house.",
+          "standardized": "Picks up 28 year old prostitute Gina Barone (2) and negotiates sex for money. The two have sex [LOCATION] the garage of the Francois residence until Francois becomes angry, feeling that Barone had ripped him off. He chokes her until her death and then moves the body to the attic of the house."
+        },
+        {
+          "original": "Approached a 7-year-old girl in the park, asking her if she would like to go with him to see some kittens. Girl trustingly followed him as he led her to a deserted building. Choked her until unconscious and raped her. Left after he was done. She was found later wandering the streets: bleeding, crying and confused. Case was brought to court and astoundingly Black was given an admonishment, a verdict particular to Scottish law, which is effectively no more than a warning to be on good behavior in the future. Lost job. Moved to Kinlochleven",
+          "standardized": "Approached a 7-year-old girl [LOCATION] the park, asking her if she would like to go with him to see some kittens. Girl trustingly followed him as he led her to a deserted building. Choked her until unconscious and raped her. Left after he was done. She was found later wandering the streets: bleeding, crying and confused. Case was brought to court and astoundingly Black was given an admonishment, a verdict particular to Scottish law, which is effectively no more than a warning to be on good behavior [LOCATION] the future. Lost job. Moved to Kinlochleven"
+        },
+        {
+          "original": "Meeting was held in Newcastle to consider the possibility of Black\u2019s involvement in similar murders. As well as possible murders in France, Amsterdam, Ireland and Germany, there were up to ten unsolved abduction and murder in England which bore Black\u2019s MO: April Fabb, abducted in Norfolk, 1969; 9-year-old Christine Markham, abducted in Scunthorpe, 1973; 13-year-old Genette Tate, abducted in Devon, 1978; 14-year-old Suzanne Lawrence, found dead in Essex, 1979; 16-year-old Colette Aram, found strangled and sexually assaulted in a field in Nottingham, 1983; 14-year-old Patsy Morris, found dead near Heathrow, 1990, and Marion Crofts and Lisa Hession.",
+          "standardized": "Meeting was held [LOCATION] Newcastle to consider the possibility of Black\u2019s involvement [LOCATION] similar murders. As well as possible murders [LOCATION] France, Amsterdam, Ireland and Germany, there were up to ten unsolved abduction and murder [LOCATION] England which bore Black\u2019s [LOCATION]: April Fabb, abducted [LOCATION] Norfolk, 1969; 9-year-old [PERSON] Markham, abducted [LOCATION] Scunthorpe, 1973; 13-year-old Genette Tate, abducted [LOCATION] Devon, 1978; 14-year-old Suzanne [PERSON], found dead [LOCATION] Essex, 1979; 16-year-old Colette Aram, found strangled and sexually assaulted [LOCATION] a field [LOCATION] Nottingham, 1983; 14-year-old Patsy [PERSON], found dead near Heathrow, 1990, and Marion Crofts and [PERSON] Hession."
+        }
+      ]
+    },
+    "9": {
+      "size": 126,
+      "sample_events": [
+        {
+          "original": "The FBI officially takes over the investigation of Kimmell\u2019s murder.",
+          "standardized": "The FBI officially takes over the investigation of Kimmell\u2019s murder."
+        },
+        {
+          "original": "Eaton is formally charged for abduction of Lisa Kimmell. He was charged with first degree murder, premeditated murder, aggravated robbery, first degree sexual assault, second degree sexual assault, and aggravated kidnapping",
+          "standardized": "Eaton is formally charged for abduction of [PERSON] Kimmell. He was charged with first degree murder, premeditated murder, aggravated robbery, first degree sexual assault, second degree sexual assault, and aggravated kidnapping"
+        },
+        {
+          "original": "Eaton\u2019s trial for the murder of Kimmell begins.",
+          "standardized": "Eaton\u2019s trial for the murder of Kimmell begins."
+        },
+        {
+          "original": "Convicted for lewd and libidinous behavior with a young girl: should have been for attempted murder.",
+          "standardized": "Convicted for lewd and libidinous behavior with a [PERSON] girl: should have been for attempted murder."
+        },
+        {
+          "original": "Found guilty of capital murder.",
+          "standardized": "Found guilty of capital murder."
+        }
+      ]
+    },
+    "10": {
+      "size": 105,
+      "sample_events": [
+        {
+          "original": "Born in February 10, 1945",
+          "standardized": "Born [LOCATION] February 10, 1945"
+        },
+        {
+          "original": "Born in Poughkeepsie, NY",
+          "standardized": "Born [LOCATION] Poughkeepsie, [LOCATION]"
+        },
+        {
+          "original": "Rory Conde is born in Barranquilla, Columbia",
+          "standardized": "Rory Conde is born [LOCATION] Barranquilla, Columbia"
+        },
+        {
+          "original": "Rory\u2019s daughter is born, Lydia Conde",
+          "standardized": "Rory\u2019s daughter is born, Lydia Conde"
+        },
+        {
+          "original": "Bob was born to Robert Bennett",
+          "standardized": "[PERSON] was born to [PERSON]"
+        }
+      ]
+    },
+    "11": {
+      "size": 33,
+      "sample_events": [
+        {
+          "original": "Kills Elaine \u201cBrooke\u201d McCollum (33)",
+          "standardized": "Kills Elaine \u201cBrooke\u201d McCollum (33)"
+        },
+        {
+          "original": "Kills Carol Leighton",
+          "standardized": "Kills [PERSON] Leighton"
+        },
+        {
+          "original": "Abducted and kills both Angelica Lavallee and Barbara Byer",
+          "standardized": "Abducted and kills both Angelica Lavallee and [PERSON] Byer"
+        },
+        {
+          "original": "Kills Lucy Mugavero, 90, at Warren Hospital with digoxin\u2014a heart stimulant",
+          "standardized": "Kills Lucy Mugavero, 90, at Warren Hospital with digoxin\u2014a heart stimulant"
+        },
+        {
+          "original": "Kills Mary Natoli, 85, at Warren Hospital with digoxin",
+          "standardized": "Kills [PERSON] Natoli, 85, at Warren Hospital with digoxin"
+        }
+      ]
+    }
+  }
+}
