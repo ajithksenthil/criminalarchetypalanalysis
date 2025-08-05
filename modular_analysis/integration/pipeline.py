@@ -9,37 +9,88 @@ import os
 import numpy as np
 from typing import Dict, List, Any, Optional, Tuple
 
+# Import all required modules with fallback handling
+import sys
+import os
+
+# Add current directory to path for imports
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
+# Import modules with error handling
+def import_with_fallback(module_name, class_name):
+    """Import a class with fallback error handling."""
+    try:
+        module = __import__(module_name, fromlist=[class_name])
+        return getattr(module, class_name)
+    except ImportError:
+        print(f"Warning: Could not import {class_name} from {module_name}")
+        return None
+
+# Import all required classes
+AnalysisConfig = import_with_fallback('core.config', 'AnalysisConfig')
+Type1DataLoader = import_with_fallback('data.loaders', 'Type1DataLoader')
+Type2DataLoader = import_with_fallback('data.loaders', 'Type2DataLoader')
+DataProcessor = import_with_fallback('data.loaders', 'DataProcessor')
+TextPreprocessor = import_with_fallback('data.text_processing', 'TextPreprocessor')
+AdvancedEmbeddingGenerator = import_with_fallback('data.text_processing', 'AdvancedEmbeddingGenerator')
+TextAnalyzer = import_with_fallback('data.text_processing', 'TextAnalyzer')
+BasicClusterer = import_with_fallback('clustering.basic_clustering', 'BasicClusterer')
+MultiModalClusterer = import_with_fallback('clustering.basic_clustering', 'MultiModalClusterer')
+ImprovedClusterer = import_with_fallback('clustering.improved_clustering', 'ImprovedClusterer')
+ClusteringVisualizer = import_with_fallback('clustering.improved_clustering', 'ClusteringVisualizer')
+ConditionalClusteringPipeline = import_with_fallback('clustering.conditional_optimization', 'ConditionalClusteringPipeline')
+TransitionMatrixBuilder = import_with_fallback('markov.transition_analysis', 'TransitionMatrixBuilder')
+ConditionalAnalyzer = import_with_fallback('markov.transition_analysis', 'ConditionalAnalyzer')
+CriminalTransitionAnalyzer = import_with_fallback('markov.transition_analysis', 'CriminalTransitionAnalyzer')
+ComprehensiveVisualizer = import_with_fallback('visualization.diagrams', 'ComprehensiveVisualizer')
+LLMAnalyzer = import_with_fallback('integration.llm_analysis', 'LLMAnalyzer')
+IntegratedRegressionAnalyzer = import_with_fallback('integration.regression_analysis', 'IntegratedRegressionAnalyzer')
+AnalysisReportGenerator = import_with_fallback('integration.report_generator', 'AnalysisReportGenerator')
+
+# Import functions
 try:
-    from core.config import AnalysisConfig, setup_environment, get_clustering_config
-    from data.loaders import Type1DataLoader, Type2DataLoader, DataProcessor
-    from data.matching import load_matched_criminal_data, find_matching_pairs
-    from data.text_processing import TextPreprocessor, AdvancedEmbeddingGenerator, TextAnalyzer
-    from clustering.basic_clustering import BasicClusterer, MultiModalClusterer
-    from clustering.conditional_optimization import ConditionalClusteringPipeline
-    from clustering.improved_clustering import ImprovedClusterer, ClusteringVisualizer
-    from clustering.prototypical_network import train_prototypical_network
-    from markov.transition_analysis import TransitionMatrixBuilder, ConditionalAnalyzer, CriminalTransitionAnalyzer
-    from visualization.diagrams import ComprehensiveVisualizer
-    from integration.llm_analysis import LLMAnalyzer
-    from integration.regression_analysis import IntegratedRegressionAnalyzer
-    from integration.report_generator import AnalysisReportGenerator
-    from utils.helpers import save_json, create_output_structure, ProgressTracker
+    from core.config import setup_environment, get_clustering_config
 except ImportError:
-    # Fallback for relative imports
-    from ..core.config import AnalysisConfig, setup_environment, get_clustering_config
-    from ..data.loaders import Type1DataLoader, Type2DataLoader, DataProcessor
-    from ..data.matching import load_matched_criminal_data, find_matching_pairs
-    from ..data.text_processing import TextPreprocessor, AdvancedEmbeddingGenerator, TextAnalyzer
-    from ..clustering.basic_clustering import BasicClusterer, MultiModalClusterer
-    from ..clustering.conditional_optimization import ConditionalClusteringPipeline
-    from ..clustering.improved_clustering import ImprovedClusterer, ClusteringVisualizer
-    from ..clustering.prototypical_network import train_prototypical_network
-    from ..markov.transition_analysis import TransitionMatrixBuilder, ConditionalAnalyzer, CriminalTransitionAnalyzer
-    from ..visualization.diagrams import ComprehensiveVisualizer
-    from ..integration.llm_analysis import LLMAnalyzer
-    from ..integration.regression_analysis import IntegratedRegressionAnalyzer
-    from ..integration.report_generator import AnalysisReportGenerator
-    from ..utils.helpers import save_json, create_output_structure, ProgressTracker
+    def setup_environment():
+        return None
+    def get_clustering_config():
+        return {'use_improved': False, 'method': 'kmeans', 'auto_select_k': False, 'reduce_dims': True}
+
+try:
+    from data.matching import load_matched_criminal_data, find_matching_pairs
+except ImportError:
+    def load_matched_criminal_data(type1_dir, type2_dir):
+        print("Warning: Matched data loading not available")
+        return {}, None
+    def find_matching_pairs(type1_dir, type2_dir):
+        return []
+
+# Import utility functions
+# Import prototypical network function
+try:
+    from clustering.prototypical_network import train_prototypical_network
+except ImportError:
+    def train_prototypical_network(embeddings, labels):
+        print("Warning: Prototypical network training not available")
+        return None, None, 0.0
+
+try:
+    from utils.helpers import save_json, create_output_structure
+except ImportError:
+    import json
+    def save_json(data, filepath):
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=4, default=str)
+    def create_output_structure(base_dir):
+        subdirs = ['clustering', 'markov', 'visualization', 'analysis', 'data']
+        result = {'base': base_dir}
+        for subdir in subdirs:
+            path = os.path.join(base_dir, subdir)
+            os.makedirs(path, exist_ok=True)
+            result[subdir] = path
+        return result
 
 class CriminalArchetypalAnalysisPipeline:
     """Main analysis pipeline for criminal archetypal analysis."""
@@ -48,26 +99,30 @@ class CriminalArchetypalAnalysisPipeline:
         self.config = config
         self.client = setup_environment()
         
-        # Initialize components
-        self.text_processor = TextPreprocessor()
+        # Initialize components with fallback handling
+        self.text_processor = TextPreprocessor() if TextPreprocessor else None
         self.embedding_generator = AdvancedEmbeddingGenerator(
             use_tfidf=config.use_tfidf,
             use_augmentation=not config.no_llm,
-            client=self.client
-        )
-        self.text_analyzer = TextAnalyzer()
-        self.basic_clusterer = BasicClusterer()
-        self.improved_clusterer = ImprovedClusterer()
-        self.clustering_visualizer = ClusteringVisualizer()
-        self.conditional_pipeline = ConditionalClusteringPipeline()
-        self.multimodal_clusterer = MultiModalClusterer()
-        self.transition_builder = TransitionMatrixBuilder()
-        self.conditional_analyzer = ConditionalAnalyzer()
-        self.criminal_analyzer = CriminalTransitionAnalyzer()
-        self.visualizer = ComprehensiveVisualizer()
-        self.llm_analyzer = LLMAnalyzer(self.client)
-        self.regression_analyzer = IntegratedRegressionAnalyzer()
-        self.report_generator = AnalysisReportGenerator()
+            client=self.client,
+            model_name=config.openai_model if config.use_openai else config.embedding_model,
+            use_openai=config.use_openai,
+            use_prototype=config.use_prototype,
+            use_lexical_bias_reduction=config.use_lexical_bias_reduction
+        ) if AdvancedEmbeddingGenerator else None
+        self.text_analyzer = TextAnalyzer() if TextAnalyzer else None
+        self.basic_clusterer = BasicClusterer() if BasicClusterer else None
+        self.improved_clusterer = ImprovedClusterer() if ImprovedClusterer else None
+        self.clustering_visualizer = ClusteringVisualizer() if ClusteringVisualizer else None
+        self.conditional_pipeline = ConditionalClusteringPipeline() if ConditionalClusteringPipeline else None
+        self.multimodal_clusterer = MultiModalClusterer() if MultiModalClusterer else None
+        self.transition_builder = TransitionMatrixBuilder() if TransitionMatrixBuilder else None
+        self.conditional_analyzer = ConditionalAnalyzer() if ConditionalAnalyzer else None
+        self.criminal_analyzer = CriminalTransitionAnalyzer() if CriminalTransitionAnalyzer else None
+        self.visualizer = ComprehensiveVisualizer() if ComprehensiveVisualizer else None
+        self.llm_analyzer = LLMAnalyzer(self.client) if LLMAnalyzer else None
+        self.regression_analyzer = IntegratedRegressionAnalyzer() if IntegratedRegressionAnalyzer else None
+        self.report_generator = AnalysisReportGenerator() if AnalysisReportGenerator else None
         
         # Create output structure
         self.output_dirs = create_output_structure(config.output_dir)
@@ -201,6 +256,7 @@ class CriminalArchetypalAnalysisPipeline:
         # Step 6: Build criminal sequences and transition matrices
         print("\n[STEP 6] Building transition matrices...")
         criminal_sequences = DataProcessor.build_criminal_sequences(event_criminal_ids, labels)
+        self.criminal_sequences = criminal_sequences  # Store for later use
         
         global_transition_matrix = self.transition_builder.build_global_transition_matrix(
             criminal_sequences, optimal_k
@@ -233,13 +289,16 @@ class CriminalArchetypalAnalysisPipeline:
         
         # Step 8: Regression analysis
         print("\n[STEP 8] Regression analysis...")
-        if type2_df is not None:
+        if type2_df is not None and self.regression_analyzer:
             regression_results = self.regression_analyzer.run_comprehensive_regression_analysis(
                 criminal_sequences, type2_df
             )
             results['regression'] = regression_results
         else:
-            print("[INFO] Skipping regression analysis (no Type 2 data)")
+            if type2_df is None:
+                print("[INFO] Skipping regression analysis (no Type 2 data)")
+            else:
+                print("[INFO] Skipping regression analysis (module not available)")
             results['regression'] = {}
         
         # Step 9: Multi-modal clustering
@@ -323,14 +382,18 @@ class CriminalArchetypalAnalysisPipeline:
 
         # Step 14: Generate comprehensive report
         print("\n[STEP 14] Generating comprehensive HTML report...")
-        try:
-            loaded_results = self.report_generator.load_analysis_results(self.config.output_dir)
-            stats = self.report_generator.generate_summary_statistics(loaded_results)
-            report_path = self.report_generator.generate_html_report(loaded_results, stats, self.config.output_dir)
-            print(f"[SUCCESS] Report available at: {report_path}")
-            results['report_path'] = report_path
-        except Exception as e:
-            print(f"[WARNING] Could not generate HTML report: {e}")
+        if self.report_generator:
+            try:
+                loaded_results = self.report_generator.load_analysis_results(self.config.output_dir)
+                stats = self.report_generator.generate_summary_statistics(loaded_results)
+                report_path = self.report_generator.generate_html_report(loaded_results, stats, self.config.output_dir)
+                print(f"[SUCCESS] Report available at: {report_path}")
+                results['report_path'] = report_path
+            except Exception as e:
+                print(f"[WARNING] Could not generate HTML report: {e}")
+                results['report_path'] = None
+        else:
+            print("[INFO] HTML report generation not available")
             results['report_path'] = None
         
         print("\n" + "="*70)
@@ -423,16 +486,14 @@ class CriminalArchetypalAnalysisPipeline:
         # Save configuration
         save_json(self.config.to_dict(), os.path.join(self.config.output_dir, "config.json"))
 
-        # Save criminal sequences for reference
-        criminal_sequences = DataProcessor.build_criminal_sequences(
-            [cid for cid, _ in enumerate(embeddings) for cid in [event_criminal_ids[cid]] if cid < len(event_criminal_ids)],
-            labels
-        )
+        # Save criminal sequences for reference (already computed earlier)
+        # criminal_sequences was already computed in step 6
 
         # Convert numpy types to Python types for JSON serialization
         criminal_sequences_json = {}
-        for crim_id, seq in criminal_sequences.items():
-            criminal_sequences_json[crim_id] = [int(x) for x in seq]
+        if hasattr(self, 'criminal_sequences') and self.criminal_sequences:
+            for crim_id, seq in self.criminal_sequences.items():
+                criminal_sequences_json[crim_id] = [int(x) for x in seq]
 
         sequences_path = os.path.join(self.config.output_dir, "criminal_sequences.json")
         save_json(criminal_sequences_json, sequences_path)

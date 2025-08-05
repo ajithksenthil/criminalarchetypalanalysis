@@ -13,7 +13,8 @@ from sklearn.manifold import TSNE
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 from sklearn.preprocessing import StandardScaler
 
-from ..core.config import RANDOM_SEED
+# Constants to avoid import issues
+RANDOM_SEED = 42
 
 class ImprovedClusterer:
     """Advanced clustering with multiple algorithms and automatic optimization."""

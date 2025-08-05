@@ -14,50 +14,20 @@ import argparse
 modular_path = os.path.join(os.path.dirname(__file__), 'modular_analysis')
 sys.path.insert(0, modular_path)
 
-# Fix import issues by temporarily modifying the modules
-def fix_imports():
-    """Fix relative imports in the modular system."""
-    import importlib.util
-
-    # Load modules directly to avoid relative import issues
-    modules_to_fix = [
-        'core/config.py',
-        'data/loaders.py',
-        'data/text_processing.py',
-        'data/matching.py',
-        'clustering/basic_clustering.py',
-        'clustering/conditional_optimization.py',
-        'clustering/improved_clustering.py',
-        'clustering/prototypical_network.py',
-        'markov/transition_analysis.py',
-        'visualization/diagrams.py',
-        'integration/llm_analysis.py',
-        'integration/regression_analysis.py',
-        'integration/report_generator.py',
-        'integration/pipeline.py',
-        'utils/helpers.py'
-    ]
-
-    # Add all module directories to path
-    for module_path in modules_to_fix:
-        module_dir = os.path.dirname(os.path.join(modular_path, module_path))
-        if module_dir not in sys.path:
-            sys.path.insert(0, module_dir)
-
 def main():
     """Main entry point for the modular analysis system."""
-
-    # Fix imports first
-    fix_imports()
 
     # Import here to avoid import issues
     try:
         from core.config import AnalysisConfig
         from integration.pipeline import CriminalArchetypalAnalysisPipeline
+        print("[INFO] Successfully imported modular analysis components")
     except ImportError as e:
         print(f"Error importing modules: {e}")
-        print("The modular system has import issues. Let's use the original script instead.")
-        print("Try running: python analysis_integration_improved.py [same arguments]")
+        print("Please ensure all required dependencies are installed:")
+        print("pip install numpy pandas scikit-learn matplotlib seaborn networkx nltk sentence-transformers")
+        print("\nIf the issue persists, try running the original script:")
+        print("python analysis_integration_improved.py [same arguments]")
         sys.exit(1)
     
     # Create argument parser
@@ -136,9 +106,54 @@ Examples:
     )
     
     parser.add_argument(
-        "--use_tfidf", 
+        "--use_tfidf",
         action="store_true",
         help="Use TF-IDF embeddings instead of SentenceTransformer (offline mode)"
+    )
+
+    parser.add_argument(
+        "--use_prototype",
+        action="store_true",
+        help="Use prototype embeddings to reduce lexical bias (requires OpenAI API key)"
+    )
+
+    parser.add_argument(
+        "--openai_api_key",
+        type=str,
+        help="OpenAI API key for lexical variation generation (for prototype embeddings)"
+    )
+
+    parser.add_argument(
+        "--use_statistical_validation",
+        action="store_true",
+        help="Use statistically valid k optimization with split-sample validation"
+    )
+
+    parser.add_argument(
+        "--embedding_model",
+        type=str,
+        default="all-MiniLM-L6-v2",
+        help="Sentence embedding model to use (default: all-MiniLM-L6-v2)"
+    )
+
+    parser.add_argument(
+        "--use_openai",
+        action="store_true",
+        help="Use OpenAI embeddings (requires OPENAI_API_KEY in .env)"
+    )
+
+    parser.add_argument(
+        "--openai_model",
+        type=str,
+        default="text-embedding-3-large",
+        choices=["text-embedding-3-large", "text-embedding-3-small", "text-embedding-ada-002"],
+        help="OpenAI embedding model to use (default: text-embedding-3-large)"
+    )
+
+    parser.add_argument(
+        "--use_lexical_bias_reduction",
+        action="store_true",
+        help="Apply lexical bias reduction (replace names, locations with generic labels)"
     )
     
     parser.add_argument(

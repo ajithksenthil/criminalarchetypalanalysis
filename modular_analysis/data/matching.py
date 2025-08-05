@@ -42,6 +42,9 @@ def find_matching_pairs(type1_dir: str, type2_dir: str) -> List[Tuple[str, str]]
             match = re.search(r"Type2_(.+)\.csv", filename)
             if match:
                 criminal_id = match.group(1)
+                # Remove '_clean' suffix if present
+                if criminal_id.endswith('_clean'):
+                    criminal_id = criminal_id[:-6]  # Remove '_clean'
                 type2_files[criminal_id] = filename
     
     # Find matching pairs
@@ -98,8 +101,15 @@ def load_matched_criminal_data(type1_dir: str, type2_dir: str) -> Tuple[Dict[str
     }
     
     # Filter Type2 data to only include matching criminals
+    # Need to account for "_clean" suffix in Type2 criminal IDs
+    def matches_criminal_id(type2_id, type1_ids):
+        """Check if Type2 ID matches any Type1 ID (accounting for _clean suffix)."""
+        # Remove _clean suffix if present
+        clean_type2_id = type2_id.replace('_clean', '') if type2_id.endswith('_clean') else type2_id
+        return clean_type2_id in type1_ids
+
     matched_type2_df = type2_df[
-        type2_df["CriminalID"].astype(str).isin(matching_criminal_ids)
+        type2_df["CriminalID"].astype(str).apply(lambda x: matches_criminal_id(x, matching_criminal_ids))
     ].copy()
     
     print(f"[INFO] Loaded matched data for {len(matched_criminals_data)} criminals")

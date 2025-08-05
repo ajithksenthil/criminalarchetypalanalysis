@@ -14,14 +14,19 @@ from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-try:
-    from core.config import DEFAULT_EMBEDDING_MODEL, DEFAULT_MAX_TFIDF_FEATURES
-except ImportError:
-    try:
-        from ..core.config import DEFAULT_EMBEDDING_MODEL, DEFAULT_MAX_TFIDF_FEATURES
-    except ImportError:
-        DEFAULT_EMBEDDING_MODEL = 'all-MiniLM-L6-v2'
-        DEFAULT_MAX_TFIDF_FEATURES = 500
+# Constants to avoid import issues
+DEFAULT_EMBEDDING_MODEL = 'all-MiniLM-L6-v2'
+DEFAULT_MAX_TFIDF_FEATURES = 500
+
+# State-of-the-art embedding models
+RECOMMENDED_MODELS = {
+    "all-MiniLM-L6-v2": "Current baseline (384 dim)",
+    "all-mpnet-base-v2": "Best general performance (768 dim)",
+    "all-MiniLM-L12-v2": "Improved version (384 dim)",
+    "paraphrase-mpnet-base-v2": "Good for similar events (768 dim)",
+    "all-distilroberta-v1": "Fast and good (768 dim)",
+    "multi-qa-mpnet-base-dot-v1": "Good for diverse text (768 dim)"
+}
 
 class TextPreprocessor:
     """Text preprocessing functionality."""
@@ -74,32 +79,107 @@ class TextPreprocessor:
 
 class EmbeddingGenerator:
     """Generate embeddings for text data."""
-    
-    def __init__(self, model_name: str = DEFAULT_EMBEDDING_MODEL, use_tfidf: bool = False):
+
+    def __init__(self, model_name: str = DEFAULT_EMBEDDING_MODEL, use_tfidf: bool = False,
+                 use_prototype: bool = False, openai_api_key: Optional[str] = None,
+                 use_openai: bool = False, use_lexical_bias_reduction: bool = False):
         self.model_name = model_name
         self.use_tfidf = use_tfidf
-        
+        self.use_prototype = use_prototype
+        self.use_openai = use_openai
+        self.use_lexical_bias_reduction = use_lexical_bias_reduction
+
         if use_tfidf:
             self.vectorizer = TfidfVectorizer(max_features=DEFAULT_MAX_TFIDF_FEATURES)
             self.model = None
+            self.openai_processor = None
+        elif use_openai:
+            # Use OpenAI embeddings
+            try:
+                import sys
+                import os
+                sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+                from openai_integration import create_openai_embedding_generator
+
+                self.openai_processor = create_openai_embedding_generator(
+                    use_prototype=use_prototype,
+                    embedding_model=model_name if model_name.startswith('text-embedding-') else 'text-embedding-3-large'
+                )
+                self.model = None
+                self.vectorizer = None
+                print(f"[INFO] Using OpenAI embeddings: {model_name}")
+
+            except ImportError as e:
+                print(f"[WARNING] Could not import OpenAI integration: {e}")
+                print("[INFO] Falling back to Sentence Transformers")
+                self.use_openai = False
+                self.model = SentenceTransformer(model_name)
+                self.vectorizer = None
+                self.openai_processor = None
         else:
             self.model = SentenceTransformer(model_name)
             self.vectorizer = None
+            self.openai_processor = None
+
+        # Initialize prototype processor if requested
+        self.prototype_processor = None
+        if use_prototype and not use_tfidf:
+            try:
+                import sys
+                import os
+                sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+                from embeddings.prototype_embeddings import create_prototype_processor
+                self.prototype_processor = create_prototype_processor(use_prototype, openai_api_key)
+                print("[INFO] Prototype embedding processor initialized")
+            except ImportError as e:
+                print(f"[WARNING] Could not import prototype embeddings: {e}")
+                print("[INFO] Using standard embeddings")
+
+        # Initialize lexical bias processor if requested
+        self.lexical_bias_processor = None
+        if use_lexical_bias_reduction:
+            try:
+                import sys
+                import os
+                sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+                from lexical_bias_processor import LexicalBiasProcessor
+
+                self.lexical_bias_processor = LexicalBiasProcessor()
+                print("[INFO] Lexical bias processor initialized")
+
+            except ImportError as e:
+                print(f"[WARNING] Could not import lexical bias processor: {e}")
+                print("[INFO] Proceeding without lexical bias reduction")
+                self.use_prototype = False
     
     def generate_embeddings(self, sentences: List[str]) -> np.ndarray:
         """
         Generate embeddings for a list of sentences.
-        
+
         Args:
             sentences: List of input sentences
-            
+
         Returns:
             Embedding matrix
         """
+        # Apply lexical bias reduction if requested
+        self.processed_sentences = sentences  # Store original by default
+        if self.use_lexical_bias_reduction and self.lexical_bias_processor:
+            print("[INFO] Applying lexical bias reduction...")
+            self.processed_sentences = self.lexical_bias_processor.process_event_list(sentences)
+
         if self.use_tfidf:
-            return self._generate_tfidf_embeddings(sentences)
+            return self._generate_tfidf_embeddings(self.processed_sentences)
+        elif self.use_openai and self.openai_processor:
+            return self._generate_openai_embeddings(self.processed_sentences)
+        elif self.use_prototype and self.prototype_processor:
+            return self._generate_prototype_embeddings(self.processed_sentences)
         else:
-            return self._generate_transformer_embeddings(sentences)
+            return self._generate_transformer_embeddings(self.processed_sentences)
+
+    def get_processed_sentences(self) -> List[str]:
+        """Get the processed sentences (with bias reduction if applied)."""
+        return getattr(self, 'processed_sentences', [])
     
     def _generate_tfidf_embeddings(self, sentences: List[str]) -> np.ndarray:
         """Generate TF-IDF embeddings."""
@@ -109,6 +189,14 @@ class EmbeddingGenerator:
     def _generate_transformer_embeddings(self, sentences: List[str]) -> np.ndarray:
         """Generate transformer-based embeddings."""
         return self.model.encode(sentences)
+
+    def _generate_prototype_embeddings(self, sentences: List[str]) -> np.ndarray:
+        """Generate prototype embeddings to reduce lexical bias."""
+        return self.prototype_processor.process_events(sentences, self.model)
+
+    def _generate_openai_embeddings(self, sentences: List[str]) -> np.ndarray:
+        """Generate OpenAI embeddings."""
+        return self.openai_processor.generate_embeddings(sentences)
 
 class LexicalAugmenter:
     """Lexical augmentation using LLM for improved embeddings."""
@@ -180,9 +268,11 @@ class LexicalAugmenter:
 class AdvancedEmbeddingGenerator(EmbeddingGenerator):
     """Advanced embedding generator with lexical augmentation."""
     
-    def __init__(self, model_name: str = DEFAULT_EMBEDDING_MODEL, use_tfidf: bool = False, 
-                 use_augmentation: bool = False, client=None):
-        super().__init__(model_name, use_tfidf)
+    def __init__(self, model_name: str = DEFAULT_EMBEDDING_MODEL, use_tfidf: bool = False,
+                 use_augmentation: bool = False, client=None, use_openai: bool = False,
+                 use_prototype: bool = False, use_lexical_bias_reduction: bool = False):
+        super().__init__(model_name, use_tfidf, use_prototype=use_prototype, use_openai=use_openai,
+                        use_lexical_bias_reduction=use_lexical_bias_reduction)
         self.use_augmentation = use_augmentation
         self.augmenter = LexicalAugmenter(client) if use_augmentation else None
     
@@ -198,8 +288,12 @@ class AdvancedEmbeddingGenerator(EmbeddingGenerator):
         """
         if self.use_tfidf:
             return self._generate_tfidf_embeddings(sentences)
+        elif self.use_openai and self.openai_processor:
+            return self._generate_openai_embeddings(sentences)
         elif self.use_augmentation and self.augmenter:
             return self._generate_augmented_embeddings(sentences)
+        elif self.use_prototype and self.prototype_processor:
+            return self._generate_prototype_embeddings(sentences)
         else:
             return self._generate_transformer_embeddings(sentences)
     

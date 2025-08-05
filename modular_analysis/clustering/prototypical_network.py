@@ -11,7 +11,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import NearestCentroid
 
-from ..core.config import RANDOM_SEED
+# Constants to avoid import issues
+RANDOM_SEED = 42
 
 class PrototypicalNetwork:
     """Simple prototypical network implementation using scikit-learn."""

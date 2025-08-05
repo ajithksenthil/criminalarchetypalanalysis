@@ -285,11 +285,9 @@ class Type2DataProcessor:
             elif feature.lower() == "sex":
                 vector.append(1.0 if value and value.strip().lower() == "male" else 0.0)
             elif "victim" in feature.lower():
-                from ..utils.helpers import extract_numeric_value
                 vector.append(extract_numeric_value(value))
             else:
                 # For other features, try to extract numeric value or use binary encoding
-                from ..utils.helpers import extract_numeric_value
                 vector.append(extract_numeric_value(value))
         
         return vector if vector else None
@@ -326,7 +324,6 @@ class Type2DataProcessor:
             elif feature.lower() == "sex":
                 vector.append(1.0 if value and value.strip().lower() == "male" else 0.0)
             elif "victim" in feature.lower():
-                from ..utils.helpers import extract_numeric_value
                 vector.append(extract_numeric_value(value))
             elif feature.lower() == "education level":
                 # Encode education as ordinal: None=0, High School=1, College=2, Graduate=3
@@ -357,7 +354,6 @@ class Type2DataProcessor:
                 vector.append(1.0 if value and value.lower().startswith("yes") else 0.0)
             else:
                 # For other features, try to extract numeric value or use binary encoding
-                from ..utils.helpers import extract_numeric_value
                 vector.append(extract_numeric_value(value))
 
         return vector if vector else None

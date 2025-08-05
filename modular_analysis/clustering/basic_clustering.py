@@ -10,14 +10,9 @@ from typing import Tuple, Dict, Any, List, Optional
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 
-try:
-    from core.config import DEFAULT_KMEANS_INIT, RANDOM_SEED
-except ImportError:
-    try:
-        from ..core.config import DEFAULT_KMEANS_INIT, RANDOM_SEED
-    except ImportError:
-        DEFAULT_KMEANS_INIT = 10
-        RANDOM_SEED = 42
+# Constants to avoid import issues
+DEFAULT_KMEANS_INIT = 10
+RANDOM_SEED = 42
 
 class BasicClusterer:
     """Basic clustering functionality."""

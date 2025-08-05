@@ -69,10 +69,32 @@ class LLMAnalyzer:
         
         print("[INFO] Analyzing clusters with LLM...")
         
-        for cinfo in cluster_info:
-            theme = self.analyze_cluster_with_llm(cinfo["representative_samples"])
-            cinfo["archetypal_theme"] = theme
-            print(f"  Cluster {cinfo['cluster_id']}: {theme}")
+        # Try to use advanced OpenAI cluster labeling if available
+        try:
+            import sys
+            import os
+            sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+            from openai_integration import OpenAIClusterLabeler
+
+            labeler = OpenAIClusterLabeler()
+            labeled_clusters = labeler.label_all_clusters(cluster_info)
+
+            # Update cluster_info with detailed labels
+            for i, cinfo in enumerate(cluster_info):
+                if i < len(labeled_clusters):
+                    labeled = labeled_clusters[i]
+                    cinfo["archetypal_theme"] = labeled["archetypal_theme"]
+                    cinfo["detailed_description"] = labeled.get("detailed_description", "")
+                    cinfo["key_characteristics"] = labeled.get("key_characteristics", [])
+                    print(f"  Cluster {cinfo['cluster_id']}: {labeled['archetypal_theme']}")
+
+        except ImportError:
+            print("[INFO] Using basic LLM labeling (OpenAI integration not available)")
+            # Fallback to basic labeling
+            for cinfo in cluster_info:
+                theme = self.analyze_cluster_with_llm(cinfo["representative_samples"])
+                cinfo["archetypal_theme"] = theme
+                print(f"  Cluster {cinfo['cluster_id']}: {theme}")
         
         return cluster_info
     

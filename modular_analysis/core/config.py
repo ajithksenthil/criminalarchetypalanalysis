@@ -8,11 +8,18 @@ Configuration and global settings for the criminal archetypal analysis system.
 import os
 import random
 import numpy as np
-import openai
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+try:
+    import openai
+except ImportError:
+    openai = None
+
+try:
+    import nltk
+    from nltk.corpus import stopwords
+    from nltk.stem import WordNetLemmatizer
+    from nltk.tokenize import word_tokenize
+except ImportError:
+    nltk = None
 
 # Global settings
 RANDOM_SEED = 42
@@ -35,6 +42,10 @@ DEFAULT_KMEANS_INIT = 10
 
 def ensure_nltk_data():
     """Download required NLTK data if not present."""
+    if nltk is None:
+        print("Warning: NLTK not available")
+        return
+
     resources = {
         "punkt": "tokenizers/punkt",
         "punkt_tab": "tokenizers/punkt_tab/english/",
@@ -45,7 +56,10 @@ def ensure_nltk_data():
         try:
             nltk.data.find(path)
         except LookupError:
-            nltk.download(pkg, quiet=True)
+            try:
+                nltk.download(pkg, quiet=True)
+            except:
+                print(f"Warning: Could not download NLTK resource {pkg}")
 
 def setup_environment():
     """Set up the global environment for reproducible analysis."""
@@ -58,10 +72,13 @@ def setup_environment():
     
     # Set up OpenAI client if API key is available
     client = None
-    if "OPENAI_API_KEY" in os.environ:
-        openai.api_key = os.environ["OPENAI_API_KEY"]
-        client = openai.OpenAI()
-    
+    if openai and "OPENAI_API_KEY" in os.environ:
+        try:
+            openai.api_key = os.environ["OPENAI_API_KEY"]
+            client = openai.OpenAI()
+        except Exception as e:
+            print(f"Warning: Could not set up OpenAI client: {e}")
+
     return client
 
 def get_clustering_config():
@@ -91,6 +108,13 @@ class AnalysisConfig:
         self.multi_modal = kwargs.get('multi_modal', False)
         self.train_proto_net = kwargs.get('train_proto_net', False)
         self.use_tfidf = kwargs.get('use_tfidf', False)
+        self.use_prototype = kwargs.get('use_prototype', False)
+        self.openai_api_key = kwargs.get('openai_api_key', None)
+        self.use_statistical_validation = kwargs.get('use_statistical_validation', False)
+        self.embedding_model = kwargs.get('embedding_model', 'all-MiniLM-L6-v2')
+        self.use_openai = kwargs.get('use_openai', False)
+        self.openai_model = kwargs.get('openai_model', 'text-embedding-3-large')
+        self.use_lexical_bias_reduction = kwargs.get('use_lexical_bias_reduction', False)
         self.match_only = kwargs.get('match_only', False)
         
         # Ensure output directory exists
@@ -108,6 +132,13 @@ class AnalysisConfig:
             'multi_modal': self.multi_modal,
             'train_proto_net': self.train_proto_net,
             'use_tfidf': self.use_tfidf,
+            'use_prototype': self.use_prototype,
+            'openai_api_key': self.openai_api_key,
+            'use_statistical_validation': self.use_statistical_validation,
+            'embedding_model': self.embedding_model,
+            'use_openai': self.use_openai,
+            'openai_model': self.openai_model,
+            'use_lexical_bias_reduction': self.use_lexical_bias_reduction,
             'match_only': self.match_only
         }
     
@@ -124,5 +155,12 @@ class AnalysisConfig:
             multi_modal=args.multi_modal,
             train_proto_net=args.train_proto_net,
             use_tfidf=args.use_tfidf,
+            use_prototype=args.use_prototype,
+            openai_api_key=args.openai_api_key,
+            use_statistical_validation=args.use_statistical_validation,
+            embedding_model=args.embedding_model,
+            use_openai=args.use_openai,
+            openai_model=args.openai_model,
+            use_lexical_bias_reduction=args.use_lexical_bias_reduction,
             match_only=args.match_only
         )
